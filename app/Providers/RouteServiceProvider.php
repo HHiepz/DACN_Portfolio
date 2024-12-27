@@ -34,6 +34,9 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
+
+        // Đặt constraint toàn cục cho tham số 'id'
+        Route::pattern('id', '[0-9]+'); // chỉ nhận số
     }
 
     /**

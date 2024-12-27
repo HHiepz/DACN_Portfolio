@@ -1,0 +1,41 @@
+footer {
+    background-color: var(--md-sys-color-surface-container);
+    color: var(--md-sys-color-on-surface);
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1),
+        4px 0 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px 8px 0 0;
+    margin-top: 4rem;
+}
+
+.footer__content {
+    flex: 1;
+}
+
+.footer__content--owner {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.footer__form--label {
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+}
+
+.footer__nav {
+    display: flex;
+    list-style: none;
+    gap: 32px;
+    padding: 0;
+}
+
+.footer__nav--item a {
+    text-decoration: none;
+    color: var(--md-sys-color-on-surface);
+}
+
+/* Copyright */
+.copyright {
+    padding-top: 1rem;
+    text-align: center;
+}

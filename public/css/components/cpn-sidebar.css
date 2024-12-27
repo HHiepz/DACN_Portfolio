@@ -1,0 +1,110 @@
+/* Overide */
+#wrapper {
+    display: flex;
+    position: relative;
+}
+
+#content {
+    flex: 1;
+}
+
+/* End Overide */
+
+#sidebar-container {
+    position: sticky;
+    top: 0;
+    width: 404px;
+    min-height: 100vh;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#sidebar {
+    padding: 24px;
+    height: 100vh;
+    overflow-y: auto;
+    width: 300px;
+    background-color: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-surface);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1),
+        0 -8px 24px rgba(0, 0, 0, 0.1),
+        -8px 0 24px rgba(0, 0, 0, 0.1),
+        8px 0 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Ẩn thanh cuộn trên các trình duyệt Webkit (Chrome, Safari) */
+#sidebar::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+
+/* Ẩn thanh cuộn trên Firefox */
+#sidebar {
+    scrollbar-width: none;
+}
+
+.sidebar__name {
+    padding-top: 12px;
+    font-size: 1.375rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--md-sys-color-on-primary-container);
+}
+
+.sidebar__major {
+    padding: 12px 0;
+    font-weight: 400;
+    color: var(--md-sys-color-tertiary);
+}
+
+.sidebar__contact {}
+
+.sidebar__link {
+    text-decoration: none;
+    color: var(--md-sys-color-on-primary-container);
+}
+
+.sidebar__icon {
+    font-size: 24px;
+    display: inline-block;
+    padding: 0 12px;
+}
+
+.sidebar_skills {}
+
+.sidebar_skill {
+    padding: 8px 0;
+}
+
+.sidebar_skill--title {
+    margin: 0;
+    padding-bottom: 4px;
+}
+
+.sidebar_skill--details {
+    margin: 0;
+}
+
+@media (max-width: 992px) {
+    html {
+        font-size: 14px;
+    }
+
+    #wrapper {
+        flex-direction: column;
+    }
+
+    #sidebar-container {
+        width: 100%;
+        position: relative;
+        min-height: auto;
+        height: auto;
+        margin-bottom: 24px;
+    }
+
+    #sidebar {
+        width: 100%;
+        height: auto;
+    }
+}

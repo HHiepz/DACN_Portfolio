@@ -1,0 +1,88 @@
+/* Custom Bootstrap here... */
+
+/* Badge */
+.badge {
+    padding: 0.625rem;
+    font-size: 0.6875rem;
+    border-radius: 50px !important;
+}
+
+.badge.badge-outline-dark {
+    background-color: none;
+    color: var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline);
+}
+
+/* Button */
+.btn-primary {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    border: var(--md-sys-color-primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    border: var(--md-sys-color-primary-container);
+}
+
+.btn-secondary {
+    background-color: var(--md-sys-color-secondary);
+    color: var(--md-sys-color-on-secondary);
+    border: var(--md-sys-color-secondary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+    border: var(--md-sys-color-secondary-container);
+}
+
+.btn-tertiary {
+    background-color: var(--md-sys-color-tertiary);
+    color: var(--md-sys-color-on-tertiary);
+    border: var(--md-sys-color-tertiary);
+}
+
+.btn-tertiary:hover {
+    background-color: var(--md-sys-color-tertiary-container);
+    color: var(--md-sys-color-on-tertiary-container);
+    border: var(--md-sys-color-tertiary-container);
+}
+
+/* Button outline */
+.btn-outline-primary {
+    background-color: none;
+    color: var(--md-sys-color-primary);
+    border: 1px solid var(--md-sys-color-primary);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    border: 1px solid var(--md-sys-color-primary-container);
+}
+
+.btn-outline-secondary {
+    background-color: none;
+    color: var(--md-sys-color-secondary);
+    border: 1px solid var(--md-sys-color-secondary);
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+    border: 1px solid var(--md-sys-color-secondary-container);
+}
+
+.btn-outline-tertiary {
+    background-color: none;
+    color: var(--md-sys-color-tertiary);
+    border: 1px solid var(--md-sys-color-tertiary);
+}
+
+.btn-outline-tertiary:hover {
+    background-color: var(--md-sys-color-tertiary-container);
+    color: var(--md-sys-color-on-tertiary-container);
+    border: 1px solid var(--md-sys-color-tertiary-container);
+}
