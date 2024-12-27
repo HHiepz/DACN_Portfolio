@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\LanguageController;
 
 // Client
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -26,8 +27,17 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 // Admin
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/', [DashboardController::class, 'index'])
-        ->name('admin.dashboard')
-        ->middleware('auth');
+        ->name('admin.dashboard');
+
+    Route::controller(LanguageController::class)->group(function () {
+        // CRUD Language
+        Route::get('/languages', 'index')->name('admin.languages');
+        Route::get('/language/create', 'create')->name('admin.language.create');
+        Route::post('/language/store', 'store')->name('admin.language.store');
+        Route::get('/language/edit/{id}', 'edit')->name('admin.language.edit');
+        Route::put('/language/update/{id}', 'update')->name('admin.language.update');
+        Route::delete('/language/delete/{id}', 'destroy')->name('admin.language.delete');
+    });
 });

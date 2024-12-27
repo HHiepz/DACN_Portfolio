@@ -33,13 +33,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon bi bi-circle"></i>
-                                <p>Kỹ năng chuyên ngành</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('admin.languages') }}" class="nav-link">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Ngôn ngữ</p>
                             </a>
