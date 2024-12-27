@@ -60,18 +60,24 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 10px">#</th>
-                                                <th>Ngôn ngữ</th>
-                                                <th style="width: 150px">Thư tự ưu tiên</th>
-                                                <th style="width: 150px"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {{-- <tr class="align-middle">
+                                @if ($languages->count() == 0)
+                                    <div class="text-center">
+                                        <i class="bi bi-emoji-frown"></i>
+                                        <p>Hiện tại chưa có dữ liệu, vùi long thêm đi...</p>
+                                    </div>
+                                @else
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 10px">#</th>
+                                                    <th>Ngôn ngữ</th>
+                                                    <th style="width: 150px">Thư tự ưu tiên</th>
+                                                    <th style="width: 150px"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {{-- <tr class="align-middle">
                                                 <td>1.</td>
                                                 <td>
                                                     <p class="mb-0">Tiếng Anh</p>
@@ -85,40 +91,42 @@
                                                     <a href="#" class="btn btn-sm btn-outline-danger">Xóa</a>
                                                 </td>
                                             </tr> --}}
-                                            @foreach ($languages as $language)
-                                                <tr class="align-middle">
-                                                    <td>{{ $language->id }}.</td>
-                                                    <td>
-                                                        <p class="mb-0">{{ $language->name }}</p>
-                                                        <p class="mb-0 text-muted">
-                                                            {{ $language->short_description }}
-                                                        </p>
-                                                    </td>
-                                                    <td>
-                                                        @if ($language->priority == 0)
-                                                            <span class="badge text-bg-dark">Bình thường</span>
-                                                        @else
-                                                            <span class="badge text-bg-danger">
-                                                                {{ $language->priority }}
-                                                            </span>
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{ route('admin.language.edit', $language->id) }}"
-                                                            class="btn btn-sm btn-warning">Sửa</a>
-                                                        <form action="{{ route('admin.language.delete', $language->id) }}"
-                                                            method="POST" class="d-inline-block">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit"
-                                                                class="btn btn-sm btn-outline-danger">Xóa</button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
+                                                @foreach ($languages as $language)
+                                                    <tr class="align-middle">
+                                                        <td>{{ $language->id }}.</td>
+                                                        <td>
+                                                            <p class="mb-0">{{ $language->name }}</p>
+                                                            <p class="mb-0 text-muted">
+                                                                {{ $language->short_description }}
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            @if ($language->priority == 0)
+                                                                <span class="badge text-bg-dark">Bình thường</span>
+                                                            @else
+                                                                <span class="badge text-bg-danger">
+                                                                    {{ $language->priority }}
+                                                                </span>
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ route('admin.language.edit', $language->id) }}"
+                                                                class="btn btn-sm btn-warning">Sửa</a>
+                                                            <form
+                                                                action="{{ route('admin.language.delete', $language->id) }}"
+                                                                method="POST" class="d-inline-block">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-outline-danger">Xóa</button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @endif
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer clearfix">
