@@ -7,6 +7,7 @@ use App\Http\Controllers\Client\ProductController;
 use App\Http\Controllers\Client\ProductDetailController;
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 
 use App\Http\Controllers\Admin\DashboardController;
 
@@ -21,6 +22,7 @@ Route::group(['prefix' => 'auth'], function () {
         Route::get('/login', [LoginController::class, 'index'])->name('login');
         Route::post('/login', [LoginController::class, 'login'])->name('login.post');
     });
+    Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 });
 
 // Admin
