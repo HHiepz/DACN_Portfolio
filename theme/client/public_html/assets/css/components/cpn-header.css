@@ -1,0 +1,39 @@
+header {
+    background-color: var(--md-sys-color-surface-container);
+    padding: 2.125rem 0;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Header logo */
+.header__logo {
+    /*  */
+}
+
+.header__logo a {
+    font-weight: bold;
+    color: var(--md-sys-color-on-primary-container);
+    font-size: 1.375rem;
+}
+
+/* Header menu */
+.header_menu {
+    /*  */
+}
+
+.header__menu-list {
+    display: flex;
+    align-items: center;
+}
+
+.header__menu-item a {
+    font-size: 1rem;
+    color: var(--md-sys-color-on-primary-container);
+    display: inline-block;
+    padding: 0 0.5rem;
+}

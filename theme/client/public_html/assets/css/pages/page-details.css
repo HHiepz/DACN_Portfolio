@@ -1,0 +1,32 @@
+.detail__title {
+    font-weight: bold;
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    color: var(--md-sys-color-on-surface);
+}
+
+.detail__type {
+    font-size: 0.875rem;
+    margin-top: 0.75rem;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.detail__description {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    color: var(--md-sys-color-on-surface);
+}
+
+.detail__tech {
+    margin-bottom: 0.75rem;
+}
+
+.detail__tech--image {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.5rem;
+}
+
+.detail__buttons {
+    margin-bottom: 0.75rem;
+}
