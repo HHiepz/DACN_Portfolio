@@ -26,6 +26,9 @@
     <!--begin::Required Plugin(AdminLTE)-->
     <link rel="stylesheet" href="{{ asset('css/components/cpn-admin.css') }}">
     <!--end::Required Plugin(AdminLTE)-->
+    <!--begin::Plugin(notyf)-->
+    <link rel="stylesheet" href="{{ asset('vendors/notyf/notyf.min.css') }}">
+    <!--end::Plugin(notyf)-->
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -54,6 +57,8 @@
     <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
     <script src="{{ asset('js/components/cpn-admin.js') }}"></script>
     <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
+    <script src="{{ asset('vendors/notyf/notyf.min.js') }}"></script>
+    <script src="{{ asset('js/custom/custom-notyf.js') }}"></script>
     <script>
         const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
         const Default = {
@@ -74,6 +79,17 @@
             }
         });
     </script>
+    @if (session('success'))
+        <script>
+            notyf.success(@json(session('success')));
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            notyf.error(@json(session('error')));
+        </script>
+    @endif
     <!--end::OverlayScrollbars Configure-->
     <!--end::Script-->
 </body>

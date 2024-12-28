@@ -36,22 +36,6 @@
                             <a href="{{ route('admin.language.create') }}" class="btn btn-primary">Thêm ngôn ngữ</a>
                         </div>
                     </div>
-
-                    @if (session('success'))
-                        <div class="col-12">
-                            <div class="callout callout-success">
-                                {{ session('success') }}
-                            </div>
-                        </div>
-                    @endif
-                    @if (session('error'))
-                        <div class="col-12">
-                            <div class="callout callout-danger">
-                                {{ session('error') }}
-                            </div>
-                        </div>
-                    @endif
-
                     <!--begin::Col-->
                     <div class="col-md-12">
                         <div class="card mb-4">
