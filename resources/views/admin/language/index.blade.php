@@ -57,7 +57,7 @@
                                                     <th style="width: 10px">#</th>
                                                     <th>Ngôn ngữ</th>
                                                     <th style="width: 150px">Thư tự ưu tiên</th>
-                                                    <th style="width: 150px"></th>
+                                                    <th style="width: 250px"></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -86,7 +86,7 @@
                                                         </td>
                                                         <td>
                                                             @if ($language->priority == 0)
-                                                                <span class="badge text-bg-dark">Bình thường</span>
+                                                                <span class="badge text-bg-dark">Mặc định</span>
                                                             @else
                                                                 <span class="badge text-bg-danger">
                                                                     {{ $language->priority }}
@@ -104,6 +104,41 @@
                                                                 <button type="submit"
                                                                     class="btn btn-sm btn-outline-danger">Xóa</button>
                                                             </form>
+                                                            @if ($language->priority < 10)
+                                                                <form
+                                                                    action="{{ route('admin.language.priority.up', $language->id) }}"
+                                                                    method="POST" class="d-inline-block">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <button type="submit" class="btn btn-sm btn-info">
+                                                                        <i class="bi bi-arrow-up"></i>
+                                                                    </button>
+                                                                </form>
+                                                            @endif
+
+                                                            @if ($language->priority > 0)
+                                                                <form
+                                                                    action="{{ route('admin.language.priority.down', $language->id) }}"
+                                                                    method="POST" class="d-inline-block">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <button type="submit" class="btn btn-sm btn-info">
+                                                                        <i class="bi bi-arrow-down"></i>
+                                                                    </button>
+                                                                </form>
+                                                            @endif
+
+                                                            @if ($language->priority != 0)
+                                                                <form
+                                                                    action="{{ route('admin.language.priority.reset', $language->id) }}"
+                                                                    method="POST" class="d-inline-block">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <button type="submit" class="btn btn-sm btn-dark">
+                                                                        <i class="bi bi-arrow-repeat"></i>
+                                                                    </button>
+                                                                </form>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach

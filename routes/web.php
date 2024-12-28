@@ -32,12 +32,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         ->name('admin.dashboard');
 
     Route::controller(LanguageController::class)->group(function () {
-        // CRUD Language
         Route::get('/languages', 'index')->name('admin.languages');
         Route::get('/language/create', 'create')->name('admin.language.create');
         Route::post('/language/store', 'store')->name('admin.language.store');
         Route::get('/language/edit/{id}', 'edit')->name('admin.language.edit');
         Route::put('/language/update/{id}', 'update')->name('admin.language.update');
         Route::delete('/language/delete/{id}', 'destroy')->name('admin.language.delete');
+        Route::put('/language/priority/up/{id}', 'upPriority')->name('admin.language.priority.up');
+        Route::put('/language/priority/down/{id}', 'downPriority')->name('admin.language.priority.down');
+        Route::put('/language/priority/reset/{id}', 'resetPriority')->name('admin.language.priority.reset');
     });
 });

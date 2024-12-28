@@ -14,7 +14,7 @@ class LanguageController extends Controller
      */
     public function index()
     {
-        $languages = Language::orderByDesc('created_at')->paginate(10);
+        $languages = Language::orderByDesc('priority')->paginate(10);
         return view('admin.language.index', compact('languages'));
     }
 
@@ -34,18 +34,14 @@ class LanguageController extends Controller
         $formField = $request->validate(
             [
                 'name' => 'required',
-                'priority' => 'required|integer',
                 'short_description' => 'required'
             ],
             [
                 'name.required' => 'Tên ngôn ngữ không được để trống',
-                'priority.required' => 'Thứ tự ưu tiên không được để trống',
-                'priority.integer' => 'Thứ tự ưu tiên phải là số nguyên',
                 'short_description.required' => 'Mô tả ngắn không được để trống'
             ],
             [
                 'name' => 'Tên ngôn ngữ',
-                'priority' => 'Thứ tự ưu tiên',
                 'short_description' => 'Mô tả ngắn'
             ]
         );
@@ -53,7 +49,7 @@ class LanguageController extends Controller
         $language = new Language();
         $language->user_id = Auth::id();
         $language->name = $formField['name'];
-        $language->priority = $formField['priority'];
+        $language->priority = 0;
         $language->short_description = $formField['short_description'];
         $language->save();
 
@@ -85,18 +81,14 @@ class LanguageController extends Controller
         $formField = $request->validate(
             [
                 'name' => 'required',
-                'priority' => 'required|integer',
                 'short_description' => 'required'
             ],
             [
                 'name.required' => 'Tên ngôn ngữ không được để trống',
-                'priority.required' => 'Thứ tự ưu tiên không được để trống',
-                'priority.integer' => 'Thứ tự ưu tiên phải là số nguyên',
                 'short_description.required' => 'Mô tả ngắn không được để trống'
             ],
             [
                 'name' => 'Tên ngôn ngữ',
-                'priority' => 'Thứ tự ưu tiên',
                 'short_description' => 'Mô tả ngắn'
             ]
         );
@@ -104,7 +96,6 @@ class LanguageController extends Controller
         $language = Language::find($id);
 
         $language->name = $formField['name'];
-        $language->priority = $formField['priority'];
         $language->short_description = $formField['short_description'];
 
         $language->save();
@@ -123,5 +114,50 @@ class LanguageController extends Controller
             return redirect()->route('admin.languages')->with('success', 'Ngôn ngữ đã được xóa thành công.');
         }
         return redirect()->route('admin.languages')->with('error', 'Không tìm thấy ngôn ngữ cần xóa.');
+    }
+
+    /**
+     * Change priority up
+     */
+    public function upPriority($id)
+    {
+        $language = Language::find($id);
+
+        if ($language) {
+            $language->priority = $language->priority + 1;
+            $language->save();
+            return redirect()->route('admin.languages')->with('success', 'Ngôn ngữ đã được thay đổi vị trí thành công.');
+        }
+        return redirect()->route('admin.languages')->with('error', 'Không tìm thấy ngôn ngữ cần thay đổi vị trí.');
+    }
+
+    /**
+     * Change priority up
+     */
+    public function downPriority($id)
+    {
+        $language = Language::find($id);
+
+        if ($language) {
+            $language->priority = $language->priority - 1;
+            $language->save();
+            return redirect()->route('admin.languages')->with('success', 'Ngôn ngữ đã được thay đổi vị trí thành công.');
+        }
+        return redirect()->route('admin.languages')->with('error', 'Không tìm thấy ngôn ngữ cần thay đổi vị trí.');
+    }
+
+    /**
+     * Reset priority
+     */
+    public function resetPriority($id)
+    {
+        $language = Language::find($id);
+
+        if ($language) {
+            $language->priority = 0;
+            $language->save();
+            return redirect()->route('admin.languages')->with('success', 'Reset thành công ' . $language->name);
+        }
+        return redirect()->route('admin.languages')->with('error', 'Không tìm thấy ngôn ngữ cần thay đổi vị trí.');
     }
 }

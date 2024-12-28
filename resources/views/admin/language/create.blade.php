@@ -33,20 +33,6 @@
                 <!--begin::Row-->
                 <div class="row g-4">
                     <!--begin::Col-->
-                    @if (session('success'))
-                        <div class="col-12">
-                            <div class="callout callout-success">
-                                {{ session('success') }}
-                            </div>
-                        </div>
-                    @endif
-                    @if (session('error'))
-                        <div class="col-12">
-                            <div class="callout callout-danger">
-                                {{ session('error') }}
-                            </div>
-                        </div>
-                    @endif
                     <div class="col-md-12">
                         <form action="{{ route('admin.language.store') }}" method="POST">
                             @csrf
@@ -58,17 +44,6 @@
                                 <!--end::Header-->
                                 <!--begin::Body-->
                                 <div class="card-body">
-                                    <div class="mb-3">
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon1">Thứ tự ưu tiên</span>
-                                            <input type="number" class="form-control" name="priority" value="0"
-                                                placeholder="Mặc định là 0, số càng lớn thì hiển thị càng trước"
-                                                aria-describedby="basic-addon1" />
-                                        </div>
-                                        @error('priority')
-                                            {{ $message }}
-                                        @enderror
-                                    </div>
                                     <div class="mb-3">
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon2">Ngôn ngữ</span>
