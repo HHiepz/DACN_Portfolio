@@ -52,7 +52,7 @@ class SkillCategoryController extends Controller
         $category->priority = 0;
         $category->save();
 
-        return redirect()->route('admin.skill.create')->with('success', 'Đã thêm mới nhóm kỹ năng thành công.');
+        return redirect()->back()->with('success', 'Đã thêm mới nhóm kỹ năng thành công.');
     }
 
     /**
@@ -108,9 +108,9 @@ class SkillCategoryController extends Controller
         $skillCategory = SkillCategory::find($id);
         if ($skillCategory) {
             $skillCategory->delete();
-            return redirect()->route('admin.skills')->with('success', 'Đã xóa kỹ năng thành công.');
+            return redirect()->route('admin.skill-categories')->with('success', 'Đã xóa kỹ năng thành công.');
         }
-        return redirect()->route('admin.skills')->with('error', 'Kỹ năng không tồn tại.');
+        return redirect()->route('admin.skill-categories')->with('error', 'Kỹ năng không tồn tại.');
     }
 
     public function upPriority($id)
@@ -119,9 +119,9 @@ class SkillCategoryController extends Controller
         if ($skillCategory) {
             $skillCategory->priority = $skillCategory->priority + 1;
             $skillCategory->save();
-            return redirect()->route('admin.skill-categories')->with('success', 'Đã thay đổi thứ tự ưu tiên.');
+            return redirect()->back()->with('success', 'Đã thay đổi thứ tự ưu tiên.');
         }
-        return redirect()->route('admin.skill-categories')->with('error', 'Không tìm thấy nhóm kỹ năng.');
+        return redirect()->back()->with('error', 'Không tìm thấy nhóm kỹ năng.');
     }
 
     public function downPriority($id)
@@ -130,9 +130,9 @@ class SkillCategoryController extends Controller
         if ($skillCategory) {
             $skillCategory->priority = $skillCategory->priority - 1;
             $skillCategory->save();
-            return redirect()->route('admin.skill-categories')->with('success', 'Đã thay đổi thứ tự ưu tiên.');
+            return redirect()->back()->with('success', 'Đã thay đổi thứ tự ưu tiên.');
         }
-        return redirect()->route('admin.skill-categories')->with('error', 'Không tìm thấy nhóm kỹ năng.');
+        return redirect()->back()->with('error', 'Không tìm thấy nhóm kỹ năng.');
     }
 
     public function resetPriority($id)
@@ -141,8 +141,8 @@ class SkillCategoryController extends Controller
         if ($skillCategory) {
             $skillCategory->priority = 0;
             $skillCategory->save();
-            return redirect()->route('admin.skill-categories')->with('success', 'Đã reset thứ tự ưu tiên.');
+            return redirect()->back()->with('success', 'Đã reset thứ tự ưu tiên.');
         }
-        return redirect()->route('admin.skill-categories')->with('error', 'Không tìm thấy nhóm kỹ năng.');
+        return redirect()->back()->with('error', 'Không tìm thấy nhóm kỹ năng.');
     }
 }

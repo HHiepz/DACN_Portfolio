@@ -80,7 +80,7 @@ class SkillController extends Controller
         if ($category) {
             return view('admin.skill.edit', compact('category'));
         }
-        return redirect()->route('admin.skills')->with('error', 'Kỹ năng không tồn tại.');
+        return redirect()->back()->with('error', 'Kỹ năng không tồn tại.');
     }
 
     /**
