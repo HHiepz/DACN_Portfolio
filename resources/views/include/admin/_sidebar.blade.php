@@ -38,6 +38,12 @@
                                 <p>Ngôn ngữ</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.skill-categories') }}" class="nav-link">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Kỹ năng chuyên ngành</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>

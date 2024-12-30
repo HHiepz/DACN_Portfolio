@@ -11,6 +11,8 @@ use App\Http\Controllers\Auth\LogoutController;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\Admin\SkillCategoryController;
+use App\Http\Controllers\Admin\SkillController;
 
 // Client
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -41,5 +43,23 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         Route::put('/language/priority/up/{id}', 'upPriority')->name('admin.language.priority.up');
         Route::put('/language/priority/down/{id}', 'downPriority')->name('admin.language.priority.down');
         Route::put('/language/priority/reset/{id}', 'resetPriority')->name('admin.language.priority.reset');
+    });
+
+    Route::controller(SkillController::class)->group(function () {
+        Route::post('/skill/store', 'store')->name('admin.skill.store');
+        Route::get('/skill/edit/{id}', 'edit')->name('admin.skill.edit');
+        Route::put('/skill/update/{id}', 'update')->name('admin.skill.update');
+        Route::delete('/skill/delete/{id}', 'destroy')->name('admin.skill.delete');
+    });
+
+    Route::controller(SkillCategoryController::class)->group(function () {
+        Route::get('/skill-categories', 'index')->name('admin.skill-categories');
+        Route::get('/skill-category/create', 'create')->name('admin.skill-category.create');
+        Route::post('/skill-category/store', 'store')->name('admin.skill-category.store');
+        Route::put('/skill-category/update/{id}', 'update')->name('admin.skill-category.update');
+        Route::delete('/skill-category/delete/{id}', 'destroy')->name('admin.skill-category.delete');
+        Route::put('/skill-category/priority/up/{id}', 'upPriority')->name('admin.skill-category.priority.up');
+        Route::put('/skill-category/priority/down/{id}', 'downPriority')->name('admin.skill-category.priority.down');
+        Route::put('/skill-category/priority/reset/{id}', 'resetPriority')->name('admin.skill-category.priority.reset');
     });
 });
