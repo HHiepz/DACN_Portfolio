@@ -47,15 +47,18 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::controller(SkillController::class)->group(function () {
         Route::post('/skill/store', 'store')->name('admin.skill.store');
-        Route::get('/skill/edit/{id}', 'edit')->name('admin.skill.edit');
         Route::put('/skill/update/{id}', 'update')->name('admin.skill.update');
         Route::delete('/skill/delete/{id}', 'destroy')->name('admin.skill.delete');
+        Route::put('/skill/priority/up/{id}', 'upPriority')->name('admin.skill.priority.up');
+        Route::put('/skill/priority/down/{id}', 'downPriority')->name('admin.skill.priority.down');
+        Route::put('/skill/priority/reset/{id}', 'resetPriority')->name('admin.skill.priority.reset');
     });
 
     Route::controller(SkillCategoryController::class)->group(function () {
         Route::get('/skill-categories', 'index')->name('admin.skill-categories');
         Route::get('/skill-category/create', 'create')->name('admin.skill-category.create');
         Route::post('/skill-category/store', 'store')->name('admin.skill-category.store');
+        Route::get('/skill-category/edit/{id}', 'edit')->name('admin.skill-category.edit');
         Route::put('/skill-category/update/{id}', 'update')->name('admin.skill-category.update');
         Route::delete('/skill-category/delete/{id}', 'destroy')->name('admin.skill-category.delete');
         Route::put('/skill-category/priority/up/{id}', 'upPriority')->name('admin.skill-category.priority.up');

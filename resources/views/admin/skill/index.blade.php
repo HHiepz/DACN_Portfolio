@@ -80,7 +80,7 @@
                                                             @endif
                                                         </td>
                                                         <td>
-                                                            <a href="{{ route('admin.skill.edit', $category->id) }}"
+                                                            <a href="{{ route('admin.skill-category.edit', $category->id) }}"
                                                                 class="btn btn-sm btn-warning">Sửa</a>
                                                             <form
                                                                 action="{{ route('admin.skill-category.delete', $category->id) }}"

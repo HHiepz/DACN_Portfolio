@@ -68,7 +68,11 @@ class SkillCategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = SkillCategory::with('skills')->find($id);
+        if ($category) {
+            return view('admin.skill.edit', compact('category'));
+        }
+        return redirect()->back()->with('error', 'Kỹ năng không tồn tại.');
     }
 
     /**

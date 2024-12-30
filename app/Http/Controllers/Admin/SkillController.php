@@ -76,11 +76,7 @@ class SkillController extends Controller
      */
     public function edit(string $id)
     {
-        $category = SkillCategory::with('skills')->find($id);
-        if ($category) {
-            return view('admin.skill.edit', compact('category'));
-        }
-        return redirect()->back()->with('error', 'Kỹ năng không tồn tại.');
+        //
     }
 
     /**
@@ -131,5 +127,39 @@ class SkillController extends Controller
         } else {
             return redirect()->back()->with('error', 'Kỹ năng không tồn tại.');
         }
+    }
+
+
+    public function upPriority($id)
+    {
+        $skill = Skill::find($id);
+        if ($skill) {
+            $skill->priority = $skill->priority + 1;
+            $skill->save();
+            return redirect()->back()->with('success', 'Đã thay đổi thứ tự ưu tiên.');
+        }
+        return redirect()->back()->with('error', 'Không tìm thấy nhóm kỹ năng.');
+    }
+
+    public function downPriority($id)
+    {
+        $skill = Skill::find($id);
+        if ($skill) {
+            $skill->priority = $skill->priority - 1;
+            $skill->save();
+            return redirect()->back()->with('success', 'Đã thay đổi thứ tự ưu tiên.');
+        }
+        return redirect()->back()->with('error', 'Không tìm thấy nhóm kỹ năng.');
+    }
+
+    public function resetPriority($id)
+    {
+        $skill = Skill::find($id);
+        if ($skill) {
+            $skill->priority = 0;
+            $skill->save();
+            return redirect()->back()->with('success', 'Đã reset thứ tự ưu tiên.');
+        }
+        return redirect()->back()->with('error', 'Không tìm thấy nhóm kỹ năng.');
     }
 }

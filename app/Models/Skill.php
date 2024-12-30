@@ -12,6 +12,6 @@ class Skill extends Model
 
     public function skillCategory()
     {
-        return $this->belongsTo(SkillCategory::class, 'skill_category_id');
+        return $this->belongsTo(SkillCategory::class, 'skill_category_id')->orderBy('priority', 'desc');
     }
 }

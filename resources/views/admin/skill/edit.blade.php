@@ -68,7 +68,7 @@
                                                         value="{{ $category->id }}" />
                                                     <div class="input-group">
                                                         <span class="input-group-text" style="width: 50px">
-                                                            #{{ $skill->id }}
+                                                            #{{ $skill->priority }}
                                                         </span>
                                                         <input type="text" class="form-control" name="skill_name"
                                                             value="{{ $skill->name }}"
@@ -87,6 +87,39 @@
                                                         Xóa
                                                     </button>
                                                 </form>
+                                                @if ($skill->priority < 10)
+                                                    <form action="{{ route('admin.skill.priority.up', $skill->id) }}"
+                                                        method="POST" class="d-inline-block">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit" class="btn btn-link text-secondary p-0"
+                                                            style="font-size: 0.875rem;">
+                                                            Up
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                                @if ($skill->priority > 0)
+                                                    <form action="{{ route('admin.skill.priority.down', $skill->id) }}"
+                                                        method="POST" class="d-inline-block">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit" class="btn btn-link text-secondary p-0"
+                                                            style="font-size: 0.875rem;">
+                                                            Down
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                                @if ($skill->priority != 0)
+                                                    <form action="{{ route('admin.skill.priority.reset', $skill->id) }}"
+                                                        method="POST" class="d-inline-block">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit" class="btn btn-link text-secondary p-0"
+                                                            style="font-size: 0.875rem;">
+                                                            Reset
+                                                        </button>
+                                                    </form>
+                                                @endif
                                             </div>
                                         @endforeach
                                     @endif
