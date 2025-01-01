@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Client\HomeController;
-use App\Http\Controllers\Client\ProductController;
+use App\Http\Controllers\Client\ProductController as ClientProductController;
 use App\Http\Controllers\Client\ProductDetailController;
 
 use App\Http\Controllers\Auth\LoginController;
@@ -13,10 +13,14 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\SkillCategoryController;
 use App\Http\Controllers\Admin\SkillController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\ProductCategoryController;
+use App\Http\Controllers\Admin\ProductTechnologyController;
+use App\Http\Controllers\Admin\TechnologyController;
 
 // Client
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/product', [ProductController::class, 'index'])->name('product');
+Route::get('/product', [ClientProductController::class, 'index'])->name('product');
 Route::get('/product/{id}', [ProductDetailController::class, 'index'])->name('product.detail');
 
 // Auth
@@ -64,5 +68,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         Route::put('/skill-category/priority/up/{id}', 'upPriority')->name('admin.skill-category.priority.up');
         Route::put('/skill-category/priority/down/{id}', 'downPriority')->name('admin.skill-category.priority.down');
         Route::put('/skill-category/priority/reset/{id}', 'resetPriority')->name('admin.skill-category.priority.reset');
+    });
+
+    Route::controller(AdminProductController::class)->group(function () {
+        Route::get('/products', 'index')->name('admin.products');
+    });
+
+    Route::controller(TechnologyController::class)->group(function(){
+        Route::get('/technologies', 'index')->name('admin.technologies');
     });
 });

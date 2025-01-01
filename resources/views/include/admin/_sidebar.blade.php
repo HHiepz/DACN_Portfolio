@@ -46,6 +46,28 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link ">
+                        <p>
+                            Quản lý dự án
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.technologies') }}" class="nav-link">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Công nghệ</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.products') }}" class="nav-link">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Danh sách dự án</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
             <!--end::Sidebar Menu-->
         </nav>
