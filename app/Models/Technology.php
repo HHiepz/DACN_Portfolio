@@ -9,4 +9,8 @@ class Technology extends Model
 {
     use HasFactory;
     protected $table = "technologies";
+    protected $fillable = [
+        'name',
+        'image_url'
+    ];
 }
