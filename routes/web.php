@@ -74,7 +74,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         Route::get('/products', 'index')->name('admin.products');
     });
 
-    Route::controller(TechnologyController::class)->group(function(){
+    Route::controller(TechnologyController::class)->group(function () {
         Route::get('/technologies', 'index')->name('admin.technologies');
+        Route::get('/technology/create', 'create')->name('admin.technology.create');
+        Route::post('/technology/store', 'store')->name('admin.technology.store');
+        Route::get('/technology/edit/{id}', 'edit')->name('admin.technology.edit');
+        Route::put('/technology/update/{id}', 'update')->name('admin.technology.update');
+        Route::delete('/technology/delete/{id}', 'destroy')->name('admin.technology.delete');
     });
 });

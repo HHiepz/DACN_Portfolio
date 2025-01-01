@@ -33,7 +33,7 @@
                 <div class="row g-4">
                     <div class="col-md-12">
                         <div class="text-end">
-                            <a href="{{ route('admin.language.create') }}" class="btn btn-primary">Thêm công nghệ</a>
+                            <a href="{{ route('admin.technology.create') }}" class="btn btn-primary">Thêm công nghệ</a>
                         </div>
                     </div>
                     <!--begin::Col-->
@@ -44,18 +44,24 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 10px">#</th>
-                                                <th>Công nghệ</th>
-                                                <th style="width: 150px">Thư tự ưu tiên</th>
-                                                <th style="width: 250px"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {{-- <tr class="align-middle">
+                                @if ($technologies->count() == 0)
+                                    <div class="text-center">
+                                        <i class="bi bi-emoji-frown"></i>
+                                        <p>Hiện tại chưa có dữ liệu, vùi long thêm đi...</p>
+                                    </div>
+                                @else
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 10px">#</th>
+                                                    <th>Ngôn ngữ</th>
+                                                    <th style="width: 150px">Hình ảnh</th>
+                                                    <th style="width: 250px"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {{-- <tr class="align-middle">
                                                 <td>1.</td>
                                                 <td>
                                                     <p class="mb-0">Tiếng Anh</p>
@@ -69,13 +75,43 @@
                                                     <a href="#" class="btn btn-sm btn-outline-danger">Xóa</a>
                                                 </td>
                                             </tr> --}}
-                                        </tbody>
-                                    </table>
-                                </div>
+                                                @foreach ($technologies as $technology)
+                                                    <tr class="align-middle">
+                                                        <td>{{ $technology->id }}.</td>
+                                                        <td>
+                                                            <p class="mb-0">{{ $technology->name }}</p>
+                                                        </td>
+                                                        <td>
+                                                            @if (empty($technology->image_url))
+                                                                <span class="badge bg-danger">Chưa có hình ảnh</span>
+                                                            @else
+                                                                <img src="{{ asset('storage/' . $technology->image_url) }}"
+                                                                    alt="{{ $technology->name }}" class="img-fluid"
+                                                                    style="max-width: 50px">
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ route('admin.technology.edit', $technology->id) }}"
+                                                                class="btn btn-sm btn-warning">Sửa</a>
+                                                            <form
+                                                                action="{{ route('admin.technology.delete', $technology->id) }}"
+                                                                method="POST" class="d-inline-block">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-outline-danger">Xóa</button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @endif
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer clearfix">
-                                {{-- technologies->links('pagination::bootstrap-5') --}}
+                                {{ $technologies->links('pagination::bootstrap-5') }}
                             </div>
                         </div>
                     </div>
