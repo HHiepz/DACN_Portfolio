@@ -44,38 +44,94 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 10px">#</th>
-                                                <th>Ngôn ngữ</th>
-                                                <th style="width: 150px">Thư tự ưu tiên</th>
-                                                <th style="width: 250px"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {{-- <tr class="align-middle">
-                                                <td>1.</td>
-                                                <td>
-                                                    <p class="mb-0">Tiếng Anh</p>
-                                                    <p class="mb-0 text-muted">
-                                                        Đọc hiểu tốt, viết tốt, nói tốt, nghe tốt
-                                                    </p>
-                                                </td>
-                                                <td><span class="badge text-bg-dark">Bình thường</span></td>
-                                                <td>
-                                                    <a href="#" class="btn btn-sm btn-warning">Sửa</a>
-                                                    <a href="#" class="btn btn-sm btn-outline-danger">Xóa</a>
-                                                </td>
-                                            </tr> --}}
-                                        </tbody>
-                                    </table>
-                                </div>
+                                @if ($products->count() == 0)
+                                    <div class="text-center">
+                                        <i class="bi bi-emoji-frown"></i>
+                                        <p>Hiện tại chưa có dữ liệu, vùi long thêm đi...</p>
+                                    </div>
+                                @else
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 10px">#</th>
+                                                    <th>Ngôn ngữ</th>
+                                                    <th style="width: 150px">Thư tự ưu tiên</th>
+                                                    <th style="width: 150px">Hình ảnh</th>
+                                                    <th style="width: 250px"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {{-- <tr class="align-middle">
+                                                    <td>1.</td>
+                                                    <td>
+                                                        <p class="mb-0">Tiếng Anh</p>
+                                                        <p class="mb-0 text-muted">
+                                                            Đọc hiểu tốt, viết tốt, nói tốt, nghe tốt
+                                                        </p>
+                                                    </td>
+                                                    <td><span class="badge text-bg-dark">Bình thường</span></td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-sm btn-warning">Sửa</a>
+                                                        <a href="#" class="btn btn-sm btn-outline-danger">Xóa</a>
+                                                    </td>
+                                                </tr> --}}
+                                                @foreach ($products as $product)
+                                                    <tr class="align-middle">
+                                                        <td>{{ $product->id }}.</td>
+                                                        <td>
+                                                            <p class="mb-0">
+                                                                <span class="fw-bold">
+                                                                    {{ $product->name }}
+                                                                </span>
+                                                                <span class="badge bg-primary">
+                                                                    {{ $product->category->name }}
+                                                                </span>
+                                                            <p class="mb-0">
+                                                                <i class="bi bi-box"></i> {{ $product->type }}
+                                                            </p>
+                                                            @if (isset($product->project_started_at) || isset($product->project_ended_at))
+                                                                <p class="mb-0">
+                                                                    <i class="bi bi-calendar"></i>
+                                                                    @if ($product->project_started_at && $product->project_ended_at)
+                                                                        {{ $product->project_started_at }}
+                                                                        -
+                                                                        {{ $product->project_ended_at }}
+                                                                    @elseif ($product->project_started_at)
+                                                                        {{ $product->project_started_at }}
+                                                                    @elseif ($product->project_ended_at)
+                                                                        {{ $product->project_ended_at }}
+                                                                    @endif
+                                                                </p>
+                                                            @endif
+                                                            <p class="mb-0 text-muted">
+                                                                {{ $product->short_description }}
+                                                            </p>
+                                                        </td>
+                                                        <td><span class="badge text-bg-dark">Bình thường</span></td>
+                                                        <td>
+                                                            @if (empty($product->image_url))
+                                                                <span class="badge bg-danger">Chưa có hình ảnh</span>
+                                                            @else
+                                                                <img src="{{ asset('storage/' . $product->thumbnail) }}"
+                                                                    alt="{{ $product->name }}" class="img-fluid"
+                                                                    style="width: 150px; height: 150px">
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            <a href="#" class="btn btn-sm btn-warning">Sửa</a>
+                                                            <a href="#" class="btn btn-sm btn-outline-danger">Xóa</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @endif
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer clearfix">
-                                {{-- products->links('pagination::bootstrap-5') --}}
+                                {{ $products->links('pagination::bootstrap-5') }}
                             </div>
                         </div>
                     </div>
