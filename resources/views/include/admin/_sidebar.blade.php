@@ -66,6 +66,12 @@
                                 <p>Danh sách dự án</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.product-categories') }}" class="nav-link">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Danh mục</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>

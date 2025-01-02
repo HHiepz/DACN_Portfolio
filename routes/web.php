@@ -82,4 +82,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         Route::put('/technology/update/{id}', 'update')->name('admin.technology.update');
         Route::delete('/technology/delete/{id}', 'destroy')->name('admin.technology.delete');
     });
+
+    Route::controller(ProductCategoryController::class)->group(function () {
+        Route::get('/product-categories', 'index')->name('admin.product-categories');
+        Route::get('/product-category/create', 'create')->name('admin.product-category.create');
+        Route::post('/product-category/store', 'store')->name('admin.product-category.store');
+        Route::get('/product-category/edit/{id}', 'edit')->name('admin.product-category.edit');
+        Route::put('/product-category/update/{id}', 'update')->name('admin.product-category.update');
+        Route::delete('/product-category/delete/{id}', 'destroy')->name('admin.product-category.delete');
+    });
 });
