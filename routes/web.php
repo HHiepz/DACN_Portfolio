@@ -72,6 +72,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::controller(AdminProductController::class)->group(function () {
         Route::get('/products', 'index')->name('admin.products');
+        Route::get('/product/create', 'create')->name('admin.product.create');
+        Route::post('/product/store', 'store')->name('admin.product.store');
+        Route::get('/product/edit/{id}', 'edit')->name('admin.product.edit');
+        Route::put('/product/update/{id}', 'update')->name('admin.product.update');
+        Route::delete('/product/delete/{id}', 'destroy')->name('admin.product.delete');
+        Route::put('/product/priority/up/{id}', 'upPriority')->name('admin.product.priority.up');
+        Route::put('/product/priority/down/{id}', 'downPriority')->name('admin.product.priority.down');
+        Route::put('/product/priority/reset/{id}', 'resetPriority')->name('admin.product.priority.reset');
     });
 
     Route::controller(TechnologyController::class)->group(function () {

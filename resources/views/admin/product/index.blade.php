@@ -33,7 +33,7 @@
                 <div class="row g-4">
                     <div class="col-md-12">
                         <div class="text-end">
-                            <a href="{{ route('admin.language.create') }}" class="btn btn-primary">Thêm dự án</a>
+                            <a href="{{ route('admin.product.create') }}" class="btn btn-primary">Thêm dự án</a>
                         </div>
                     </div>
                     <!--begin::Col-->
@@ -55,7 +55,8 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width: 10px">#</th>
-                                                    <th>Ngôn ngữ</th>
+                                                    <th>Dự án</th>
+                                                    <th style="width: 150px">Trạng thái</th>
                                                     <th style="width: 150px">Thư tự ưu tiên</th>
                                                     <th style="width: 150px">Hình ảnh</th>
                                                     <th style="width: 250px"></th>
@@ -108,19 +109,83 @@
                                                                 {{ $product->short_description }}
                                                             </p>
                                                         </td>
-                                                        <td><span class="badge text-bg-dark">Bình thường</span></td>
+                                                        <td>
+                                                            @if ($product->status == 'draft')
+                                                                <span class="badge bg-secondary">Nháp</span>
+                                                            @elseif ($product->status == 'published')
+                                                                <span class="badge bg-success">Đã xuất bản</span>
+                                                            @elseif ($product->status == 'hidden')
+                                                                <span class="badge bg-secondary">Ẩn</span>
+                                                            @else
+                                                                <span class="badge bg-info">Không xác định -
+                                                                    {{ $product->status }}</span>
+                                                            @endif
+
+                                                        </td>
+                                                        <td>
+                                                            @if ($product->priority == 0)
+                                                                <span class="badge text-bg-dark">Mặc định</span>
+                                                            @else
+                                                                <span class="badge text-bg-danger">
+                                                                    {{ $product->priority }}
+                                                                </span>
+                                                            @endif
+                                                        </td>
                                                         <td>
                                                             @if (empty($product->image_url))
                                                                 <span class="badge bg-danger">Chưa có hình ảnh</span>
                                                             @else
-                                                                <img src="{{ asset('storage/' . $product->thumbnail) }}"
+                                                                <img src="{{ asset('storage/' . $product->image_url) }}"
                                                                     alt="{{ $product->name }}" class="img-fluid"
                                                                     style="width: 150px; height: 150px">
                                                             @endif
                                                         </td>
                                                         <td>
-                                                            <a href="#" class="btn btn-sm btn-warning">Sửa</a>
-                                                            <a href="#" class="btn btn-sm btn-outline-danger">Xóa</a>
+                                                            <a href="{{ route('admin.product.edit', $product->id) }}"
+                                                                class="btn btn-sm btn-warning">Sửa</a>
+                                                            <form
+                                                                action="{{ route('admin.product.delete', $product->id) }}"
+                                                                method="POST" class="d-inline-block">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-outline-danger">Xóa</button>
+                                                            </form>
+                                                            @if ($product->priority < 10)
+                                                                <form
+                                                                    action="{{ route('admin.product.priority.up', $product->id) }}"
+                                                                    method="POST" class="d-inline-block">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <button type="submit" class="btn btn-sm btn-info">
+                                                                        <i class="bi bi-arrow-up"></i>
+                                                                    </button>
+                                                                </form>
+                                                            @endif
+
+                                                            @if ($product->priority > 0)
+                                                                <form
+                                                                    action="{{ route('admin.product.priority.down', $product->id) }}"
+                                                                    method="POST" class="d-inline-block">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <button type="submit" class="btn btn-sm btn-info">
+                                                                        <i class="bi bi-arrow-down"></i>
+                                                                    </button>
+                                                                </form>
+                                                            @endif
+
+                                                            @if ($product->priority != 0)
+                                                                <form
+                                                                    action="{{ route('admin.product.priority.reset', $product->id) }}"
+                                                                    method="POST" class="d-inline-block">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <button type="submit" class="btn btn-sm btn-dark">
+                                                                        <i class="bi bi-arrow-repeat"></i>
+                                                                    </button>
+                                                                </form>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach

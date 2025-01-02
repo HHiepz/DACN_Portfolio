@@ -29,6 +29,9 @@
     <!--begin::Plugin(notyf)-->
     <link rel="stylesheet" href="{{ asset('vendors/notyf/notyf.min.css') }}">
     <!--end::Plugin(notyf)-->
+    <!--begin::Plugin(select2)-->
+    <link rel="stylesheet" href="{{ asset('vendors/select2/select2.min.css') }}">
+    <!--end::Plugin(select2)-->
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -56,9 +59,9 @@
     <script src="{{ asset('vendors/bootstrap/bootstrap.min.js') }}"></script>
     <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
     <script src="{{ asset('js/components/cpn-admin.js') }}"></script>
-    <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
-    <script src="{{ asset('vendors/notyf/notyf.min.js') }}"></script>
-    <script src="{{ asset('js/custom/custom-notyf.js') }}"></script>
+    <!--end::Required Plugin(AdminLTE)-->
+    <script src="{{ asset('vendors/jquery/jquery.min.js') }}"></script>
+    <!--begin::OverlayScrollbars Configure-->
     <script>
         const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
         const Default = {
@@ -79,6 +82,10 @@
             }
         });
     </script>
+    <!--end::OverlayScrollbars Configure-->
+    <!--begin::Plugin(notyf)-->
+    <script src="{{ asset('vendors/notyf/notyf.min.js') }}"></script>
+    <script src="{{ asset('js/custom/custom-notyf.js') }}"></script>
     @if (session('success'))
         <script>
             notyf.success(@json(session('success')));
@@ -90,7 +97,28 @@
             notyf.error(@json(session('error')));
         </script>
     @endif
-    <!--end::OverlayScrollbars Configure-->
+    <!--end::Plugin(notyf)-->
+    <!--begin::Plugin(select2)-->
+    <script src="{{ asset('vendors/select2/select2.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.js-active-select2').select2({
+                placeholder: "Select an option",
+                allowClear: true
+            });
+        });
+    </script>
+    <!--end::Plugin(select2)-->
+    <!--begin::Plugin(tinyeditor)-->
+    <script src="https://cdn.tiny.cloud/1/{{ env('TINYEDITOR_API_KEY') }}/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea.activeTinyeditor', // Replace this CSS selector to match the placeholder element for TinyMCE
+            plugins: 'code table lists',
+            toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
+        });
+    </script>
+    <!--end::Plugin(tinyeditor)-->
     <!--end::Script-->
 </body>
 <!--end::Body-->
