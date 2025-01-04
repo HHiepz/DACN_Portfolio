@@ -17,6 +17,8 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductTechnologyController;
 use App\Http\Controllers\Admin\TechnologyController;
+use App\Http\Controllers\Admin\SocialController;
+use App\Http\Controllers\Admin\SocialCategoryController;
 
 // Client
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -98,5 +100,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         Route::get('/product-category/edit/{id}', 'edit')->name('admin.product-category.edit');
         Route::put('/product-category/update/{id}', 'update')->name('admin.product-category.update');
         Route::delete('/product-category/delete/{id}', 'destroy')->name('admin.product-category.delete');
+    });
+
+    Route::controller(SocialController::class)->group(function () {
+        Route::get('/socials', 'index')->name('admin.socials');
+        Route::get('/social/create', 'create')->name('admin.social.create');
+        Route::get('/social/edit/{id}', 'edit')->name('admin.social.edit');
+    });
+
+    Route::controller(SocialCategoryController::class)->group(function () {
+        Route::get('/social-categories', 'index')->name('admin.social-categories');
+        Route::get('/social-category/create', 'create')->name('admin.social-category.create');
+        Route::get('/social-category/edit/{id}', 'edit')->name('admin.social-category.edit');
     });
 });
