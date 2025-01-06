@@ -106,7 +106,7 @@
                 </li>
                 <li class="nav-item ">
                     <a href="{{ route('admin.profile.edit') }}"
-                        class="nav-link {{ Route::currentRouteName() == 'admin.profile' ? 'bg-primary' : '' }}">
+                        class="nav-link {{ Route::currentRouteName() == 'admin.profile.edit' ? 'bg-primary' : '' }}">
                         <i class="nav-icon bi bi-palette"></i>
                         <p>Cài đặt thông tin</p>
                     </a>
