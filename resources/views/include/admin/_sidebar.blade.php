@@ -104,6 +104,13 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item ">
+                    <a href="{{ route('admin.profile.edit') }}"
+                        class="nav-link {{ Route::currentRouteName() == 'admin.profile' ? 'bg-primary' : '' }}">
+                        <i class="nav-icon bi bi-palette"></i>
+                        <p>Cài đặt thông tin</p>
+                    </a>
+                </li>
             </ul>
             <!--end::Sidebar Menu-->
         </nav>

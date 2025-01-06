@@ -18,8 +18,10 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('country')->nullable();
+            $table->string('address')->nullable();
             $table->string('major')->nullable();
-            $table->text('irame_google_map')->nullable();
+            $table->text('iframe_google_map')->nullable();
+            $table->date('birthday')->nullable();
         });
     }
 
@@ -29,7 +31,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['image_url', 'first_name', 'last_name', 'description', 'phone_number', 'country', 'major', 'irame_google_map']);
+            $table->dropColumn(['image_url', 'first_name', 'last_name', 'description', 'birthday', 'address', 'phone_number', 'country', 'major', 'iframe_google_map']);
         });
     }
 };

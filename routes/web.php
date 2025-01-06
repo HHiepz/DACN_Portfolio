@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\ProductTechnologyController;
 use App\Http\Controllers\Admin\TechnologyController;
 use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\Admin\SocialCategoryController;
+use App\Http\Controllers\Admin\ProfileController;
 
 // Client
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -121,5 +122,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         Route::get('/social-category/edit/{id}', 'edit')->name('admin.social-category.edit');
         Route::put('/social-category/update/{id}', 'update')->name('admin.social-category.update');
         Route::delete('/social-category/delete/{id}', 'destroy')->name('admin.social-category.delete');
+    });
+
+    Route::controller(ProfileController::class)->group(function () {
+        Route::get('/profile/edit', 'edit')->name('admin.profile.edit');
+        Route::put('/profile/update', 'update')->name('admin.profile.update');
     });
 });
