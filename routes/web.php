@@ -106,6 +106,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         Route::get('/socials', 'index')->name('admin.socials');
         Route::get('/social/create', 'create')->name('admin.social.create');
         Route::get('/social/edit/{id}', 'edit')->name('admin.social.edit');
+        Route::put('/social/update/{id}', 'update')->name('admin.social.update');
+        Route::post('/social/store', 'store')->name('admin.social.store');
+        Route::delete('/social/delete/{id}', 'destroy')->name('admin.social.delete');
+        Route::put('/social/priority/up/{id}', 'upPriority')->name('admin.social.priority.up');
+        Route::put('/social/priority/down/{id}', 'downPriority')->name('admin.social.priority.down');
+        Route::put('/social/priority/reset/{id}', 'resetPriority')->name('admin.social.priority.reset');
     });
 
     Route::controller(SocialCategoryController::class)->group(function () {

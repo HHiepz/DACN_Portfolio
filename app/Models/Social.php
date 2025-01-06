@@ -10,8 +10,8 @@ class Social extends Model
     use HasFactory;
     protected $table = 'socials';
 
-    public function socialCategory()
+    public function category()
     {
-        return $this->belongsTo(SocialCategory::class);
+        return $this->belongsTo(SocialCategory::class, 'social_category_id');
     }
 }
