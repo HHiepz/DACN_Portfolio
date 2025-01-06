@@ -32,7 +32,7 @@
         <div class="app-content">
             <!--begin::Container-->
             <div class="container-fluid">
-                <form action="#" method="POST">
+                <form action="{{ route('admin.social-category.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <!--begin::Row-->
                     <div class="row g-4">
@@ -53,13 +53,14 @@
                                 <div class="card-body">
                                     <div class="mb-3">
                                         <div class="mb-3">
-                                            <label for="social-category_name" class="form-label fw-bold">Tên danh
+                                            <label for="socialCategory_name" class="form-label fw-bold">Tên danh
                                                 mục</label>
-                                            <input type="text" name="social-category_name" id="social-category_name"
-                                                class="form-control" placeholder="Tên danh mục" />
+                                            <input type="text" name="socialCategory_name" id="socialCategory_name"
+                                                class="form-control" placeholder="Tên danh mục"
+                                                value="{{ old('socialCategory_name') }}" />
                                         </div>
-                                        @error('social-category_name')
-                                            {{ $message }}
+                                        @error('socialCategory_name')
+                                            <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
@@ -76,9 +77,10 @@
                                 <!--begin::Body-->
                                 <div class="card-body">
                                     <div class="mb-3">
-                                        <input type="file" class="activeFilePond" name="file" accept="image/*" />
-                                        @error('social-category_image_url')
-                                            {{ $message }}
+                                        <input type="file" class="activeFilePond" name="socialCategory_image"
+                                            accept="image/*" />
+                                        @error('socialCategory_image')
+                                            <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>

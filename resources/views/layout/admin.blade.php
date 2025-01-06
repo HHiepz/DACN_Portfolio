@@ -32,10 +32,6 @@
     <!--begin::Plugin(select2)-->
     <link rel="stylesheet" href="{{ asset('vendors/select2/select2.min.css') }}">
     <!--end::Plugin(select2)-->
-    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
-    <!-- Image Preview Plugin -->
-    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
-        rel="stylesheet">
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -125,19 +121,6 @@
     </script>
     <!--end::Plugin(tinyeditor)-->
     <!--end::Script-->
-    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-    <script>
-        // Đăng ký plugin
-        FilePond.registerPlugin(FilePondPluginImagePreview);
-        FilePond.create(document.querySelector('.activeFilePond'), {
-            labelIdle: `Kéo và thả ảnh vào đây hoặc <span class="filepond--label-action">Chọn ảnh</span>`,
-            stylePanelAspectRatio: 1 / 2, // Tỉ lệ khung preview
-            allowImagePreview: true, // Bật tính năng preview
-            allowMultiple: false, // Không cho phép nhiều file
-            imagePreviewHeight: 250, // Chiều cao preview
-        });
-    </script>
 </body>
 <!--end::Body-->
 

@@ -111,6 +111,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::controller(SocialCategoryController::class)->group(function () {
         Route::get('/social-categories', 'index')->name('admin.social-categories');
         Route::get('/social-category/create', 'create')->name('admin.social-category.create');
+        Route::post('/social-category/store', 'store')->name('admin.social-category.store');
         Route::get('/social-category/edit/{id}', 'edit')->name('admin.social-category.edit');
     });
 });

@@ -44,80 +44,82 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                {{-- If don't have any data --}}
-                                <div class="text-center">
-                                    <i class="bi bi-emoji-frown"></i>
-                                    <p>Hiện tại chưa có dữ liệu, vùi long thêm đi...</p>
-                                </div>
-                                {{-- If have data --}}
-                                <div class="table-responsive">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 10px">#</th>
-                                                <th>Dự án</th>
-                                                <th style="width: 150px">Trạng thái</th>
-                                                <th style="width: 150px">Thư tự ưu tiên</th>
-                                                <th style="width: 150px">Hình ảnh</th>
-                                                <th style="width: 250px"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="align-middle">
-                                                <td>1.</td>
-                                                <td>
-                                                    <p class="mb-0">Tiếng Anh</p>
-                                                    <p class="mb-0 text-muted">
-                                                        Đọc hiểu tốt, viết tốt, nói tốt, nghe tốt
-                                                    </p>
-                                                </td>
-                                                <td><span class="badge text-bg-dark">Bình thường</span></td>
-                                                <td><span class="badge text-bg-dark">Bình thường</span></td>
-                                                <td>
-                                                    <span class="badge bg-danger">Chưa có hình ảnh</span>
-                                                </td>
-                                                <td>
-                                                    <a href="#" class="btn btn-sm btn-warning">Sửa</a>
-                                                    <form action="#" method="POST" class="d-inline-block">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit"
-                                                            class="btn btn-sm btn-outline-danger">Xóa</button>
-                                                    </form>
+                                @if ($socialCategories->count() == 0)
+                                    <div class="text-center">
+                                        <i class="bi bi-emoji-frown"></i>
+                                        <p>Hiện tại chưa có dữ liệu, vùi long thêm đi...</p>
+                                    </div>
+                                @else
+                                    {{-- If have data --}}
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 10px">#</th>
+                                                    <th>Danh mục</th>
+                                                    <th style="width: 150px">Hình ảnh</th>
+                                                    <th style="width: 250px"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($socialCategories as $category)
+                                                    <tr class="align-middle">
+                                                        <td>{{ $category->id }}.</td>
+                                                        <td>
+                                                            <p class="mb-0"> {{ $category->name }} </p>
+                                                        </td>
+                                                        <td>
+                                                            @if (empty($category->image_url))
+                                                                <span class="badge bg-danger">Chưa có hình ảnh</span>
+                                                            @else
+                                                                <img src="{{ asset('storage/' . $category->image_url) }}"
+                                                                    class="img-fluid" alt="" />
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            <a href="#" class="btn btn-sm btn-warning">Sửa</a>
+                                                            <form action="#" method="POST" class="d-inline-block">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-outline-danger">Xóa</button>
+                                                            </form>
 
-                                                    <form action="#" method="POST" class="d-inline-block">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button type="submit" class="btn btn-sm btn-info">
-                                                            <i class="bi bi-arrow-up"></i>
-                                                        </button>
-                                                    </form>
+                                                            <form action="#" method="POST" class="d-inline-block">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <button type="submit" class="btn btn-sm btn-info">
+                                                                    <i class="bi bi-arrow-up"></i>
+                                                                </button>
+                                                            </form>
 
-                                                    <form action="#" method="POST" class="d-inline-block">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button type="submit" class="btn btn-sm btn-info">
-                                                            <i class="bi bi-arrow-down"></i>
-                                                        </button>
-                                                    </form>
+                                                            <form action="#" method="POST" class="d-inline-block">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <button type="submit" class="btn btn-sm btn-info">
+                                                                    <i class="bi bi-arrow-down"></i>
+                                                                </button>
+                                                            </form>
 
 
-                                                    <form action="#" method="POST" class="d-inline-block">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button type="submit" class="btn btn-sm btn-dark">
-                                                            <i class="bi bi-arrow-repeat"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                                            <form action="#" method="POST" class="d-inline-block">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <button type="submit" class="btn btn-sm btn-dark">
+                                                                    <i class="bi bi-arrow-repeat"></i>
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @endif
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer clearfix">
-                                {{-- Paginate there --}}
+                                {{ $socialCategories->links('pagination::bootstrap-5') }}
                             </div>
                         </div>
                     </div>
