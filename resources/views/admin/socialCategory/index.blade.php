@@ -66,7 +66,19 @@
                                                     <tr class="align-middle">
                                                         <td>{{ $category->id }}.</td>
                                                         <td>
-                                                            <p class="mb-0"> {{ $category->name }} </p>
+                                                            {{ $category->name }}
+                                                            @if ($category->socials->count() > 0)
+                                                                <p class="mb-0 text-muted">Số sản phẩm:
+                                                                    {{ $category->socials->count() }}
+                                                                </p>
+                                                                <p class="mb-0 text-muted">
+                                                                    @foreach ($category->socials as $social)
+                                                                        <span class="badge bg-primary">
+                                                                            {{ $social->name }}
+                                                                        </span>
+                                                                    @endforeach
+                                                                </p>
+                                                            @endif
                                                         </td>
                                                         <td>
                                                             @if (empty($category->image_url))
@@ -77,37 +89,15 @@
                                                             @endif
                                                         </td>
                                                         <td>
-                                                            <a href="#" class="btn btn-sm btn-warning">Sửa</a>
-                                                            <form action="#" method="POST" class="d-inline-block">
+                                                            <a href="{{ route('admin.social-category.edit', $category->id) }}"
+                                                                class="btn btn-sm btn-warning">Sửa</a>
+                                                            <form
+                                                                action="{{ route('admin.social-category.delete', $category->id) }}"
+                                                                method="POST" class="d-inline-block">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit"
                                                                     class="btn btn-sm btn-outline-danger">Xóa</button>
-                                                            </form>
-
-                                                            <form action="#" method="POST" class="d-inline-block">
-                                                                @csrf
-                                                                @method('PUT')
-                                                                <button type="submit" class="btn btn-sm btn-info">
-                                                                    <i class="bi bi-arrow-up"></i>
-                                                                </button>
-                                                            </form>
-
-                                                            <form action="#" method="POST" class="d-inline-block">
-                                                                @csrf
-                                                                @method('PUT')
-                                                                <button type="submit" class="btn btn-sm btn-info">
-                                                                    <i class="bi bi-arrow-down"></i>
-                                                                </button>
-                                                            </form>
-
-
-                                                            <form action="#" method="POST" class="d-inline-block">
-                                                                @csrf
-                                                                @method('PUT')
-                                                                <button type="submit" class="btn btn-sm btn-dark">
-                                                                    <i class="bi bi-arrow-repeat"></i>
-                                                                </button>
                                                             </form>
                                                         </td>
                                                     </tr>

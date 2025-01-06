@@ -113,5 +113,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         Route::get('/social-category/create', 'create')->name('admin.social-category.create');
         Route::post('/social-category/store', 'store')->name('admin.social-category.store');
         Route::get('/social-category/edit/{id}', 'edit')->name('admin.social-category.edit');
+        Route::put('/social-category/update/{id}', 'update')->name('admin.social-category.update');
+        Route::delete('/social-category/delete/{id}', 'destroy')->name('admin.social-category.delete');
     });
 });
