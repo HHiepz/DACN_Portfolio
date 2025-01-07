@@ -40,5 +40,12 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'birthday' => 'datetime'
     ];
+
+    // Call this function, use $user->fullname
+    public function getFullnameAttribute()
+    {
+        return $this->last_name . ' ' . $this->first_name;
+    }
 }

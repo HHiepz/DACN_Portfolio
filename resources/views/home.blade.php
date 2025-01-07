@@ -17,11 +17,9 @@
         <div class="container">
             <section class="short-info">
                 <div class="text-center">
-                    <h1>Trần Hữu Hiệp - Web Developer</h1>
+                    <h1>{{ $user->fullname }} - {{ $user->major }}</h1>
                     <p class="text-start">
-                        Với 2 năm kinh nghiệm làm việc với ngôn ngữ PHP, tôi có thể xây dựng hệ thống Backend,
-                        RESTful API với Laravel. Sử dụng thành thạo mô hình Model-View-Controller và Git (Github) để
-                        quản lý và triển khai dự án.
+                        {!! $user->description !!}
                     </p>
                 </div>
             </section>
@@ -201,18 +199,15 @@
                 </div>
             </section>
 
-
-            <section class="map">
-                <div class="text-center">
-                    <h3 class="section__title">Sinh sống và làm việc</h3>
-                    <p class="section__description text-danger">VIET NAM</p>
-                </div>
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d37551.75812652027!2d106.54329905659716!3d10.853761615170697!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ae8d6408f5d%3A0x2b4a3cf382ff5d55!2zWHXDom4gVGjhu5tpIFRoxrDhu6NuZywgSMOzYyBNw7RuLCBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e1!3m2!1svi!2s!4v1733947116302!5m2!1svi!2s"
-                    width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </section>
+            @if (!empty($user->iframe_google_map) && !empty($user->country))
+                <section class="map">
+                    <div class="text-center">
+                        <h3 class="section__title">Sinh sống và làm việc</h3>
+                        <p class="section__description text-danger">{{ $user->country }}</p>
+                    </div>
+                    {!! $user->iframe_google_map !!}
+                </section>
+            @endif
 
             <footer>
                 <div class="container">
@@ -244,7 +239,7 @@
                     </div>
                     <div class="copyright">
                         Trong trường hợp cần thêm thông tin vui lòng liên hệ qua
-                        <span class="fw-bold">tranhuuhiep2004@gmail.com</span>. Cảm ơn
+                        <span class="fw-bold">{{ $user->email }}</span>. Cảm ơn
                         đã ghé
                     </div>
                 </div>

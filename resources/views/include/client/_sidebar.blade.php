@@ -3,14 +3,19 @@
         <!-- Avatar, Major, Contact (fb, github) -->
         <section class="border-dark border-bottom d-flex flex-column align-items-center py-3">
             <div class="sidebar__avatar">
-                <img src="https://placehold.co/150x150" class="img-fluid rounded-circle" alt="" />
+                @if (empty($user->image_url))
+                    <img src="https://placehold.co/150x150" class="img-fluid rounded-circle" alt="" />
+                @else
+                    <img src="{{ asset('storage/' . $user->image_url) }}" class="img-fluid rounded-circle d-block mx-auto"
+                        style="width: 200px; height: 200px; object-fit: cover;" alt="" />
+                @endif
             </div>
             <p class="sidebar__name mb-0">
-                Trần Hữu Hiệp
+                {{ $user->fullname }}
             </p>
             <div class="sidebar__major">
                 <span>
-                    Web Developer
+                    {{ $user->major }}
                 </span>
             </div>
             <div class="sidebar__contact">
@@ -27,15 +32,15 @@
             <div class="row g-2">
                 <div class="col-12 d-flex">
                     <span>Ngày sinh:</span>
-                    <span class="ms-auto">13/01/2004</span>
+                    <span class="ms-auto">{{ $user->birthday->format('d/m/Y') }}</span>
                 </div>
                 <div class="col-12 d-flex">
                     <span>Số điện thoại:</span>
-                    <span class="ms-auto">(+84) 389 802 966</span>
+                    <span class="ms-auto">{{ $user->phone_number }}</span>
                 </div>
                 <div class="col-12 d-flex">
                     <span>Địa chỉ:</span>
-                    <span class="ms-auto">D.12, Ho Chi Minh City</span>
+                    <span class="ms-auto">{{ $user->address }}</span>
                 </div>
             </div>
         </section>
