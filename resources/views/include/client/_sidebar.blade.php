@@ -53,20 +53,24 @@
             </div>
         </section>
 
-        <section class="border-dark border-bottom py-3">
-            <div class="sidebar__category">
-                <span class="fw-bold h5 pb-3 d-block">
-                    Ngôn ngữ
-                </span>
-            </div>
-
-            <div class="sidebar__skills">
-                <div class="sidebar_skill">
-                    <p class="sidebar_skill--title fw-bold">English</p>
-                    <p class="sidebar_skill--details">Đọc, nghe cơ bản.</p>
+        @if ($languages->count() > 0)
+            <section class="border-dark border-bottom py-3">
+                <div class="sidebar__category">
+                    <span class="fw-bold h5 pb-3 d-block">
+                        Ngôn ngữ
+                    </span>
                 </div>
-            </div>
-        </section>
+
+                <div class="sidebar__skills">
+                    @foreach ($languages as $language)
+                        <div class="sidebar_skill">
+                            <p class="sidebar_skill--title fw-bold">{{ $language->name }}</p>
+                            <p class="sidebar_skill--details">{{ $language->short_description }}</p>
+                        </div>
+                    @endforeach
+                </div>
+            </section>
+        @endif
 
         <section class="border-dark border-bottom py-3">
             <div class="sidebar__category">

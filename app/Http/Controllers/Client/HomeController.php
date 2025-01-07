@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Language;
 
 class HomeController extends Controller
 {
@@ -14,7 +15,8 @@ class HomeController extends Controller
     public function index()
     {
         $user = User::first();
-        return view('home', compact('user'));
+        $languages = Language::orderByDesc('priority')->get();
+        return view('home', compact('user', 'languages'));
     }
 
     /**
