@@ -12,7 +12,7 @@
                         <a href="{{ route('home') }}" class="header__menu-link">Home</a>
                     </li>
                     <li class="header__menu-item">
-                        <a href="#" class="header__menu-link">Project</a>
+                        <a href="{{ route('product') }}" class="header__menu-link">Project</a>
                     </li>
                     <li class="header__menu-item">
                         <a href="{{ route('home') }}" class="header__menu-link">Contact</a>
