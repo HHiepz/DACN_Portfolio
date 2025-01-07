@@ -27,7 +27,7 @@ use App\Models\Social;
 
 // Client
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/product', [ClientProductController::class, 'index'])->name('product');
+Route::get('/products', [ClientProductController::class, 'index'])->name('products');
 Route::get('/product/{id}', [ProductDetailController::class, 'index'])->name('product.detail');
 Route::get('/product/technology/{id}', [ClientProductController::class, 'show'])->name('product.search.technology');
 Route::get('/socials', [ClientSocialController::class, 'index'])->name('socials');

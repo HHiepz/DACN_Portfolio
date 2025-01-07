@@ -28,51 +28,58 @@
                     </div>
                 @endif
 
-                <div class="row g-5 g-md-4">
-                    @foreach ($products as $product)
-                        <div class="col-12 col-md-6 col-lg-4">
-                            <div class="section__card">
-                                <a href="{{ route('product.detail', $product->id) }}">
-                                    @if (empty($product->image_url))
-                                        <img class="card-img-top rounded" src="https://placehold.co/400x200"
-                                            alt="Title" />
-                                    @else
-                                        <img class="card-img-top rounded"
-                                            src="{{ asset('storage/' . $product->image_url) }}" alt="Title" />
-                                    @endif
-                                </a>
-                                <p class="section__card--type">
-                                    <span>{{ $product->type }}</span>
-                                    ・
-                                    <span>
-                                        @if ($product->project_started_at && $product->project_ended_at)
-                                            {{ $product->project_started_at->format('d/m/Y') }}
-                                            -
-                                            {{ $product->project_ended_at->format('d/m/Y') }}
-                                        @elseif ($product->project_started_at)
-                                            {{ $product->project_started_at->format('d/m/Y') }}
-                                        @elseif ($product->project_ended_at)
-                                            {{ $product->project_ended_at->format('d/m/Y') }}
-                                        @endif
-                                    </span>
-                                </p>
-                                <h4 class="section__card--title">
+                @if ($products->count() > 0)
+                    <div class="row g-5 g-md-4">
+                        @foreach ($products as $product)
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="section__card">
                                     <a href="{{ route('product.detail', $product->id) }}">
-                                        {{ $product->name }}
+                                        @if (empty($product->image_url))
+                                            <img class="card-img-top rounded" src="https://placehold.co/400x200"
+                                                alt="Title" />
+                                        @else
+                                            <img class="card-img-top rounded"
+                                                src="{{ asset('storage/' . $product->image_url) }}" alt="Title" />
+                                        @endif
                                     </a>
-                                </h4>
-                                <p class="section__card--text">
-                                    {{ $product->short_description }}
-                                </p>
-                                <div class="section__card--tags">
-                                    @foreach ($product->technologies as $technology)
-                                        <span class="badge badge-outline-dark">{{ $technology->name }}</span>
-                                    @endforeach
+                                    <p class="section__card--type">
+                                        <span>{{ $product->type }}</span>
+                                        ・
+                                        <span>
+                                            @if ($product->project_started_at && $product->project_ended_at)
+                                                {{ $product->project_started_at->format('d/m/Y') }}
+                                                -
+                                                {{ $product->project_ended_at->format('d/m/Y') }}
+                                            @elseif ($product->project_started_at)
+                                                {{ $product->project_started_at->format('d/m/Y') }}
+                                            @elseif ($product->project_ended_at)
+                                                {{ $product->project_ended_at->format('d/m/Y') }}
+                                            @endif
+                                        </span>
+                                    </p>
+                                    <h4 class="section__card--title">
+                                        <a href="{{ route('product.detail', $product->id) }}">
+                                            {{ $product->name }}
+                                        </a>
+                                    </h4>
+                                    <p class="section__card--text">
+                                        {{ $product->short_description }}
+                                    </p>
+                                    <div class="section__card--tags">
+                                        @foreach ($product->technologies as $technology)
+                                            <span class="badge badge-outline-dark">{{ $technology->name }}</span>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
+                        @endforeach
+                        <div class="col-12">
+                            <div class="text-end">
+                                {{ $products->links('pagination::bootstrap-5') }}
+                            </div>
                         </div>
-                    @endforeach
-                </div>
+                    </div>
+                @endif
             </section>
         </div>
     </main>

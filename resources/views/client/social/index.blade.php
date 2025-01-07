@@ -16,51 +16,53 @@
             </section>
 
             <section>
-                <div class="row g-5 g-md-4">
-                    @foreach ($socials as $social)
-                        <div class="col-12 col-md-6 col-lg-4">
-                            <div class="section__card">
-                                <a href="{{ route('social.detail', $social->id) }}">
-                                    @if (empty($social->image_url))
-                                        <img class="card-img-top rounded" src="https://placehold.co/400x200"
-                                            alt="Title" />
-                                    @else
-                                        <img class="card-img-top rounded" src="{{ asset('storage/' . $social->image_url) }}"
-                                            alt="Title" />
-                                    @endif
-                                </a>
-                                <p class="section__card--type">
-                                    <span>{{ $social->type }}</span>
-                                    ・
-                                    <span>
-                                        @if ($social->social_started_at && $social->social_ended_at)
-                                            {{ $social->social_started_at->format('d/m/Y') }}
-                                            -
-                                            {{ $social->social_ended_at->format('d/m/Y') }}
-                                        @elseif ($social->social_started_at)
-                                            {{ $social->social_started_at->format('d/m/Y') }}
-                                        @elseif ($social->social_ended_at)
-                                            {{ $social->social_ended_at->format('d/m/Y') }}
-                                        @endif
-                                    </span>
-                                </p>
-                                <h4 class="section__card--title">
+                @if ($socials->count() > 0)
+                    <div class="row g-5 g-md-4">
+                        @foreach ($socials as $social)
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="section__card">
                                     <a href="{{ route('social.detail', $social->id) }}">
-                                        {{ $social->name }}
+                                        @if (empty($social->image_url))
+                                            <img class="card-img-top rounded" src="https://placehold.co/400x200"
+                                                alt="Title" />
+                                        @else
+                                            <img class="card-img-top rounded"
+                                                src="{{ asset('storage/' . $social->image_url) }}" alt="Title" />
+                                        @endif
                                     </a>
-                                </h4>
-                                <p class="section__card--text">
-                                    {{ $social->short_description }}
-                                </p>
+                                    <p class="section__card--type">
+                                        <span>{{ $social->type }}</span>
+                                        ・
+                                        <span>
+                                            @if ($social->social_started_at && $social->social_ended_at)
+                                                {{ $social->social_started_at->format('d/m/Y') }}
+                                                -
+                                                {{ $social->social_ended_at->format('d/m/Y') }}
+                                            @elseif ($social->social_started_at)
+                                                {{ $social->social_started_at->format('d/m/Y') }}
+                                            @elseif ($social->social_ended_at)
+                                                {{ $social->social_ended_at->format('d/m/Y') }}
+                                            @endif
+                                        </span>
+                                    </p>
+                                    <h4 class="section__card--title">
+                                        <a href="{{ route('social.detail', $social->id) }}">
+                                            {{ $social->name }}
+                                        </a>
+                                    </h4>
+                                    <p class="section__card--text">
+                                        {{ $social->short_description }}
+                                    </p>
+                                </div>
+                            </div>
+                        @endforeach
+                        <div class="col-12">
+                            <div class="text-end">
+                                {{ $socials->links('pagination::bootstrap-5') }}
                             </div>
                         </div>
-                    @endforeach
-                    <div class="col-12">
-                        <div class="text-end">
-                            {{ $socials->links('pagination::bootstrap-5') }}
-                        </div>
                     </div>
-                </div>
+                @endif
             </section>
         </div>
     </main>

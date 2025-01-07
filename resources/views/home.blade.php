@@ -81,7 +81,7 @@
 
                     </div>
                     <div class="section__more">
-                        <a class="btn btn-primary" href="{{ route('product') }}">Xem thêm</a>
+                        <a class="btn btn-primary" href="{{ route('products') }}">Xem thêm</a>
                     </div>
                 </section>
             @endif
