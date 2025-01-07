@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Technology;
 
 class ProductController extends Controller
 {
@@ -12,7 +14,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('client.product.index');
+        $products = Product::orderByDesc('priority')->get();
+        $technologies = Technology::all();
+        return view('client.product.index', compact('products', 'technologies'));
     }
 
     /**
@@ -34,9 +38,11 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $products = Technology::find($id)->products;
+        $technologies = Technology::all();
+        return view('client.product.search', compact('products', 'technologies'));
     }
 
     /**

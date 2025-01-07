@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\ProfileController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/product', [ClientProductController::class, 'index'])->name('product');
 Route::get('/product/{id}', [ProductDetailController::class, 'index'])->name('product.detail');
+Route::get('/product/technology/{id}', [ClientProductController::class, 'show'])->name('product.search.technology');
 
 // Auth
 Route::group(['prefix' => 'auth'], function () {

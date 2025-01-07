@@ -13,4 +13,9 @@ class Technology extends Model
         'name',
         'image_url'
     ];
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_technology', 'technology_id', 'product_id');
+    }
 }
