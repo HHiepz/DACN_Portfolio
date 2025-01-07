@@ -19,21 +19,20 @@
                         <div class="carousel-indicators">
                             <button type="button" data-bs-target="#detail__images" data-bs-slide-to="0"
                                 class="active"></button>
-                            <button type="button" data-bs-target="#detail__images" data-bs-slide-to="1"></button>
-                            <button type="button" data-bs-target="#detail__images" data-bs-slide-to="2"></button>
                         </div>
 
                         <!-- The slideshow/carousel -->
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="https://placehold.co/4000x2000" alt="Los Angeles" class="d-block w-100">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://placehold.co/4000x2000" alt="Chicago" class="d-block w-100">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://placehold.co/4000x2000" alt="New York" class="d-block w-100">
-                            </div>
+                            @if (!empty($product->image_url))
+                                <div class="carousel-item active">
+                                    <img src="{{ asset('storage/' . $product->image_url) }}" alt="{{ $product->name }}"
+                                        class="d-block w-100">
+                                </div>
+                            @else
+                                <div class="carousel-item active">
+                                    <img src="https://placehold.co/4000x2000" alt="Los Angeles" class="d-block w-100">
+                                </div>
+                            @endif
                         </div>
 
                         <!-- Left and right controls/icons -->
@@ -48,35 +47,50 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-5">
-                    <h2 class="detail__title">Website - Poffolio</h2>
+                    <h2 class="detail__title">{{ $product->name }}</h2>
                     <p class="detail__type">
-                        <span>Dự án cá nhân</span>
+                        <span>{{ $product->type }}</span>
                         ・
-                        <span>21/11/2024</span>
+                        <span>
+                            @if ($product->project_started_at && $product->project_ended_at)
+                                {{ $product->project_started_at->format('d/m/Y') }}
+                                -
+                                {{ $product->project_ended_at->format('d/m/Y') }}
+                            @elseif ($product->project_started_at)
+                                {{ $product->project_started_at->format('d/m/Y') }}
+                            @elseif ($product->project_ended_at)
+                                {{ $product->project_ended_at->format('d/m/Y') }}
+                            @endif
+                        </span>
                     </p>
-                    <p class="detail__description">Một trang web giới thiệu bản thân, các kỹ năng và dự án
-                        đã thực hiện, được thiết kế chuyên nghiệp và tối ưu trải nghiệm người dùng.
+                    <p class="detail__description">
+                        {{ $product->short_description }}
                     </p>
-                    <div class="detail__tech">
-                        <img src="{{ asset('images/icons/html.svg') }}" class="detail__tech--image img-fluid rounded-top"
-                            alt="HTML" />
-                        <img src="{{ asset('images/icons/css.svg') }}" class="detail__tech--image img-fluid rounded-top"
-                            alt="CSS" />
-                        <img src="{{ asset('images/icons/laravel.svg') }}" class="detail__tech--image img-fluid rounded-top"
-                            alt="Laravel" />
-                        <img src="{{ asset('images/icons/mysql.svg') }}" class="detail__tech--image img-fluid rounded-top"
-                            alt="MySQL" />
-                    </div>
+                    @if ($product->technologies->count() > 0)
+                        <div class="detail__tech">
+                            @foreach ($product->technologies as $technology)
+                                <img src="{{ asset('storage/' . $technology->image_url) }}"
+                                    class="detail__tech--image img-fluid rounded-top" alt="{{ $technology->name }}" />
+                            @endforeach
+                        </div>
+                    @endif
                     <div class="detail__buttons">
-                        <a href="#" class="btn btn-tertiary">
-                            Github
-                            <i class="bi bi-github"></i>
-                        </a>
-                        <a href="#" class="btn btn-outline-tertiary">
-                            Xem trực tiếp
-                            <i class="bi bi-eye"></i>
-                        </a>
+                        @if (!empty($product->github))
+                            <a href="{{ $product->github }}" class="btn btn-tertiary">
+                                Github
+                                <i class="bi bi-github"></i>
+                            </a>
+                        @endif
+                        @if (!empty($product->preview))
+                            <a href="{{ $product->preview }}" class="btn btn-outline-tertiary">
+                                Xem trực tiếp
+                                <i class="bi bi-eye"></i>
+                            </a>
+                        @endif
                     </div>
+                </div>
+                <div class="col-12">
+                    {!! $product->description !!}
                 </div>
             </div>
         </div>

@@ -9,6 +9,10 @@ class Product extends Model
 {
     use HasFactory;
     protected $table = 'products';
+    protected $casts = [
+        'project_started_at' => 'datetime',
+        'project_ended_at' => 'datetime',
+    ];
 
     public function category()
     {

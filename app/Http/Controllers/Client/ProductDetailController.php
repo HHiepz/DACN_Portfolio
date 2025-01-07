@@ -4,15 +4,20 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
-        return view('client.productDetail.index');
+        $product = Product::find($id);
+        if ($product) {
+            return view('client.productDetail.index', compact('product'));
+        }
+        return redirect()->back()->with('error', 'Dự án không tồn tại');
     }
 
     /**

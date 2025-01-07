@@ -28,98 +28,63 @@
                 </div>
             </section>
 
-            <section class="products">
-                <div class="text-center">
-                    <h3 class="section__title">Sản phẩm</h3>
-                    <p class="section__description">Các dự án tôi đã làm trong những năm tôi học lập trình </p>
-                </div>
-                <div class="row g-5 g-md-4">
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="section__card">
-                            <a href="{{ route('product.detail', ['id' => 1]) }}">
-                                <img class="card-img-top rounded" src="https://placehold.co/400x200" alt="Title" />
-                            </a>
-                            <p class="section__card--type">
-                                <span>Dự án cá nhân</span>
-                                ・
-                                <span>21/11/2024</span>
-                            </p>
-                            <h4 class="section__card--title">
-                                <a href="{{ route('product.detail', ['id' => 1]) }}">
-                                    Website Portfolio
-                                </a>
-                            </h4>
-                            <p class="section__card--text">Một trang web giới thiệu bản thân, các kỹ năng và dự án
-                                đã thực hiện, được thiết kế chuyên nghiệp và tối ưu trải nghiệm người dùng.
-                            </p>
-                            <div class="section__card--tags">
-                                <span class="badge badge-outline-dark">HTML</span>
-                                <span class="badge badge-outline-dark">CSS</span>
-                                <span class="badge badge-outline-dark">JavaScript</span>
-                                <span class="badge badge-outline-dark">Laravel</span>
-                                <span class="badge badge-outline-dark">Bootstrap</span>
-                            </div>
-                        </div>
+            @if ($products->count() > 0)
+                <section class="products">
+                    <div class="text-center">
+                        <h3 class="section__title">Sản phẩm</h3>
+                        <p class="section__description">Các dự án tôi đã làm trong những năm tôi học lập trình </p>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="section__card">
-                            <a href="#">
-                                <img class="card-img-top rounded" src="https://placehold.co/400x200" alt="Title" />
-                            </a>
-                            <p class="section__card--type">
-                                <span>Dự án cá nhân</span>
-                                ・
-                                <span>21/11/2024</span>
-                            </p>
-                            <h4 class="section__card--title">
-                                <a href="#">
-                                    Website Portfolio
-                                </a>
-                            </h4>
-                            <p class="section__card--text">Một trang web giới thiệu bản thân, các kỹ năng và dự án
-                                đã thực hiện, được thiết kế chuyên nghiệp và tối ưu trải nghiệm người dùng.
-                            </p>
-                            <div class="section__card--tags">
-                                <span class="badge badge-outline-dark">HTML</span>
-                                <span class="badge badge-outline-dark">CSS</span>
-                                <span class="badge badge-outline-dark">JavaScript</span>
-                                <span class="badge badge-outline-dark">Laravel</span>
-                                <span class="badge badge-outline-dark">Bootstrap</span>
+                    <div class="row g-5 g-md-4">
+                        @foreach ($products as $product)
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="section__card">
+                                    <a href="{{ route('product.detail', $product->id) }}">
+                                        @if (empty($product->image_url))
+                                            <img class="card-img-top rounded" src="https://placehold.co/400x200"
+                                                alt="Title" />
+                                        @else
+                                            <img class="card-img-top rounded"
+                                                src="{{ asset('storage/' . $product->image_url) }}" alt="Title" />
+                                        @endif
+                                    </a>
+                                    <p class="section__card--type">
+                                        <span>{{ $product->type }}</span>
+                                        ・
+                                        <span>
+                                            @if ($product->project_started_at && $product->project_ended_at)
+                                                {{ $product->project_started_at->format('d/m/Y') }}
+                                                -
+                                                {{ $product->project_ended_at->format('d/m/Y') }}
+                                            @elseif ($product->project_started_at)
+                                                {{ $product->project_started_at->format('d/m/Y') }}
+                                            @elseif ($product->project_ended_at)
+                                                {{ $product->project_ended_at->format('d/m/Y') }}
+                                            @endif
+                                        </span>
+                                    </p>
+                                    <h4 class="section__card--title">
+                                        <a href="{{ route('product.detail', $product->id) }}">
+                                            {{ $product->name }}
+                                        </a>
+                                    </h4>
+                                    <p class="section__card--text">
+                                        {{ $product->short_description }}
+                                    </p>
+                                    <div class="section__card--tags">
+                                        @foreach ($product->technologies as $technology)
+                                            <span class="badge badge-outline-dark">{{ $technology->name }}</span>
+                                        @endforeach
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
+
                     </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="section__card">
-                            <a href="#">
-                                <img class="card-img-top rounded" src="https://placehold.co/400x200" alt="Title" />
-                            </a>
-                            <p class="section__card--type">
-                                <span>Dự án cá nhân</span>
-                                ・
-                                <span>21/11/2024</span>
-                            </p>
-                            <h4 class="section__card--title">
-                                <a href="#">
-                                    Website Portfolio
-                                </a>
-                            </h4>
-                            <p class="section__card--text">Một trang web giới thiệu bản thân, các kỹ năng và dự án
-                                đã thực hiện, được thiết kế chuyên nghiệp và tối ưu trải nghiệm người dùng.
-                            </p>
-                            <div class="section__card--tags">
-                                <span class="badge badge-outline-dark">HTML</span>
-                                <span class="badge badge-outline-dark">CSS</span>
-                                <span class="badge badge-outline-dark">JavaScript</span>
-                                <span class="badge badge-outline-dark">Laravel</span>
-                                <span class="badge badge-outline-dark">Bootstrap</span>
-                            </div>
-                        </div>
+                    <div class="section__more">
+                        <a class="btn btn-primary" href="{{ route('product') }}">Xem thêm</a>
                     </div>
-                </div>
-                <div class="section__more">
-                    <a class="btn btn-primary" href="{{ route('product') }}">Xem thêm</a>
-                </div>
-            </section>
+                </section>
+            @endif
 
             <section class="skills">
                 <div class="skill__item">
@@ -154,8 +119,7 @@
                         <div class="section__card">
                             <a href="#">
                                 <a href="#">
-                                    <img class="card-img-top rounded" src="https://placehold.co/400x200"
-                                        alt="Title" />
+                                    <img class="card-img-top rounded" src="https://placehold.co/400x200" alt="Title" />
                                 </a> </a>
                             <p class="section__card--type">
                                 <span>Dự án cá nhân</span>
