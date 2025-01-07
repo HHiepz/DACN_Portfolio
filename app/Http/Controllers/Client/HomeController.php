@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Language;
+use App\Models\SkillCategory;
 
 class HomeController extends Controller
 {
@@ -16,7 +17,8 @@ class HomeController extends Controller
     {
         $user = User::first();
         $languages = Language::orderByDesc('priority')->get();
-        return view('home', compact('user', 'languages'));
+        $skillCategories = SkillCategory::orderByDesc('priority')->get();
+        return view('home', compact('user', 'languages', 'skillCategories'));
     }
 
     /**

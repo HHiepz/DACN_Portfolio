@@ -72,32 +72,31 @@
             </section>
         @endif
 
-        <section class="border-dark border-bottom py-3">
-            <div class="sidebar__category">
-                <span class="fw-bold h5 pb-3 d-block">
-                    Kỹ năng chuyên ngành
-                </span>
-            </div>
+        @if ($skillCategories->count() > 0)
+            <section class="border-dark border-bottom py-3">
+                <div class="sidebar__category">
+                    <span class="fw-bold h5 pb-3 d-block">
+                        Kỹ năng chuyên ngành
+                    </span>
+                </div>
 
-            <div class="sidebar__skills">
-                <div class="sidebar_skill">
-                    <p class="sidebar_skill--title fw-bold">Frontend</p>
-                    <p class="sidebar_skill--details">HTML, CSS, JavaScript, Bootstrap 5</p>
+                <div class="sidebar__skills">
+                    @foreach ($skillCategories as $category)
+                        <div class="sidebar_skill">
+                            <p class="sidebar_skill--title fw-bold">{{ $category->name }}</p>
+                            <p class="sidebar_skill--details">
+                                @foreach ($category->skills as $skill)
+                                    {{ $skill->name }}
+                                    @if (!$loop->last)
+                                        ,
+                                    @endif
+                                @endforeach
+                            </p>
+                        </div>
+                    @endforeach
                 </div>
-                <div class="sidebar_skill">
-                    <p class="sidebar_skill--title fw-bold">Backend</p>
-                    <p class="sidebar_skill--details">PHP (OOP), Laravel (MVC, API)</p>
-                </div>
-                <div class="sidebar_skill">
-                    <p class="sidebar_skill--title fw-bold">Database</p>
-                    <p class="sidebar_skill--details">MySQL</p>
-                </div>
-                <div class="sidebar_skill">
-                    <p class="sidebar_skill--title fw-bold">Phần mềm/ứng dụng</p>
-                    <p class="sidebar_skill--details">Git (Github), VS Code, Figma, Canva</p>
-                </div>
-            </div>
-        </section>
+            </section>
+        @endif
 
         <section class="text-center py-3">
             <a href="#" class="btn btn-primary">Tải CV của tôi <i class="bi bi-download"></i></a>
