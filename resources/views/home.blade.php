@@ -17,7 +17,11 @@
         <div class="container">
             <section class="short-info">
                 <div class="text-center">
-                    <h1>{{ $user->fullname }} - {{ $user->major }}</h1>
+                    <h1>{{ $user->fullname }} -
+                        @if (!empty($user->major))
+                            {{ $user->major }}
+                        @endif
+                    </h1>
                     <p class="text-start">
                         {!! $user->description !!}
                     </p>

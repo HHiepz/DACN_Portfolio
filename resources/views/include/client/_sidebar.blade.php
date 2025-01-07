@@ -13,11 +13,13 @@
             <p class="sidebar__name mb-0">
                 {{ $user->fullname }}
             </p>
-            <div class="sidebar__major">
-                <span>
-                    {{ $user->major }}
-                </span>
-            </div>
+            @if (!empty($user->major))
+                <div class="sidebar__major">
+                    <span>
+                        {{ $user->major }}
+                    </span>
+                </div>
+            @endif
             <div class="sidebar__contact">
                 <a href="#" class="sidebar__link">
                     <i class="sidebar__icon bi bi-facebook"></i>
@@ -30,18 +32,24 @@
 
         <section class="border-dark border-bottom py-3">
             <div class="row g-2">
-                <div class="col-12 d-flex">
-                    <span>Ngày sinh:</span>
-                    <span class="ms-auto">{{ $user->birthday->format('d/m/Y') }}</span>
-                </div>
-                <div class="col-12 d-flex">
-                    <span>Số điện thoại:</span>
-                    <span class="ms-auto">{{ $user->phone_number }}</span>
-                </div>
-                <div class="col-12 d-flex">
-                    <span>Địa chỉ:</span>
-                    <span class="ms-auto">{{ $user->address }}</span>
-                </div>
+                @if (!empty($user->birthday))
+                    <div class="col-12 d-flex">
+                        <span>Ngày sinh:</span>
+                        <span class="ms-auto">{{ $user->birthday->format('d/m/Y') }}</span>
+                    </div>
+                @endif
+                @if (!empty($user->phone_number))
+                    <div class="col-12 d-flex">
+                        <span>Số điện thoại:</span>
+                        <span class="ms-auto">{{ $user->phone_number }}</span>
+                    </div>
+                @endif
+                @if (!empty($user->address))
+                    <div class="col-12 d-flex">
+                        <span>Địa chỉ:</span>
+                        <span class="ms-auto">{{ $user->address }}</span>
+                    </div>
+                @endif
             </div>
         </section>
 
