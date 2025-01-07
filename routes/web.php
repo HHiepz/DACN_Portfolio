@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\ProductController as ClientProductController;
 use App\Http\Controllers\Client\ProductDetailController;
+use App\Http\Controllers\Client\SocialController as ClientSocialController;
+use App\Http\Controllers\Client\SocialDetailController;
+
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -20,12 +23,15 @@ use App\Http\Controllers\Admin\TechnologyController;
 use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\Admin\SocialCategoryController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Models\Social;
 
 // Client
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/product', [ClientProductController::class, 'index'])->name('product');
 Route::get('/product/{id}', [ProductDetailController::class, 'index'])->name('product.detail');
 Route::get('/product/technology/{id}', [ClientProductController::class, 'show'])->name('product.search.technology');
+Route::get('/socials', [ClientSocialController::class, 'index'])->name('socials');
+Route::get('/social/{id}', [SocialDetailController::class, 'index'])->name('social.detail');
 
 // Auth
 Route::group(['prefix' => 'auth'], function () {

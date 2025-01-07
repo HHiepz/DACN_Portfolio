@@ -4,25 +4,20 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Language;
-use App\Models\SkillCategory;
-use App\Models\Product;
 use App\Models\Social;
 
-class HomeController extends Controller
+class SocialDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
-        $user = User::first();
-        $languages = Language::orderByDesc('priority')->get();
-        $skillCategories = SkillCategory::orderByDesc('priority')->get();
-        $products = Product::orderByDesc('priority')->limit(3)->get();
-        $socials = Social::orderByDesc('priority')->limit(3)->get();
-        return view('home', compact('user', 'languages', 'skillCategories', 'products', 'socials'));
+        $social = Social::find($id);
+        if ($social) {
+            return view('client.socialDetail.index', compact('social'));
+        }
+        return redirect()->back()->with('error', 'Dự án không tồn tại');
     }
 
     /**

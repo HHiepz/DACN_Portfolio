@@ -9,6 +9,11 @@ class Social extends Model
 {
     use HasFactory;
     protected $table = 'socials';
+    protected $casts = [
+        'social_started_at' => 'datetime',
+        'social_ended_at' => 'datetime',
+    ];
+
 
     public function category()
     {

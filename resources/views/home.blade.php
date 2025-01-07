@@ -109,63 +109,57 @@
                 </div>
             </section>
 
-            <section class="social">
-                <div class="text-center">
-                    <h3 class="section__title">Cuộc Sống Xã Hội</h3>
-                    <p class="section__description">Thông tin về cuộc sống xã hội của tôi</p>
-                </div>
-                <div class="row g-5 g-md-4">
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="section__card">
-                            <a href="#">
-                                <a href="#">
-                                    <img class="card-img-top rounded" src="https://placehold.co/400x200" alt="Title" />
-                                </a> </a>
-                            <p class="section__card--type">
-                                <span>Dự án cá nhân</span>
-                                ・
-                                <span>21/11/2024</span>
-                            </p>
-                            <p class="section__card--text">Một trang web giới thiệu bản thân, các kỹ năng và dự án
-                                đã thực hiện, được thiết kế chuyên nghiệp và tối ưu trải nghiệm người dùng.
-                            </p>
-                        </div>
+            @if ($socials->count() > 0)
+                <section class="social">
+                    <div class="text-center">
+                        <h3 class="section__title">Cuộc Sống Xã Hội</h3>
+                        <p class="section__description">Thông tin về cuộc sống xã hội của tôi</p>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="section__card">
-                            <a href="#">
-                                <img class="card-img-top rounded" src="https://placehold.co/400x200" alt="Title" />
-                            </a>
-                            <p class="section__card--type">
-                                <span>Dự án cá nhân</span>
-                                ・
-                                <span>21/11/2024</span>
-                            </p>
-                            <p class="section__card--text">Một trang web giới thiệu bản thân, các kỹ năng và dự án
-                                đã thực hiện, được thiết kế chuyên nghiệp và tối ưu trải nghiệm người dùng.
-                            </p>
-                        </div>
+                    <div class="row g-5 g-md-4">
+                        @foreach ($socials as $social)
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="section__card">
+                                    <a href="{{ route('social.detail', $social->id) }}">
+                                        @if (empty($social->image_url))
+                                            <img class="card-img-top rounded" src="https://placehold.co/400x200"
+                                                alt="Title" />
+                                        @else
+                                            <img class="card-img-top rounded"
+                                                src="{{ asset('storage/' . $social->image_url) }}" alt="Title" />
+                                        @endif
+                                    </a>
+                                    <p class="section__card--type">
+                                        <span>{{ $social->type }}</span>
+                                        ・
+                                        <span>
+                                            @if ($social->social_started_at && $social->social_ended_at)
+                                                {{ $social->social_started_at->format('d/m/Y') }}
+                                                -
+                                                {{ $social->social_ended_at->format('d/m/Y') }}
+                                            @elseif ($social->social_started_at)
+                                                {{ $social->social_started_at->format('d/m/Y') }}
+                                            @elseif ($social->social_ended_at)
+                                                {{ $social->social_ended_at->format('d/m/Y') }}
+                                            @endif
+                                        </span>
+                                    </p>
+                                    <h4 class="section__card--title">
+                                        <a href="{{ route('social.detail', $social->id) }}">
+                                            {{ $social->name }}
+                                        </a>
+                                    </h4>
+                                    <p class="section__card--text">
+                                        {{ $social->short_description }}
+                                    </p>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="section__card">
-                            <a href="#">
-                                <img class="card-img-top rounded" src="https://placehold.co/400x200" alt="Title" />
-                            </a>
-                            <p class="section__card--type">
-                                <span>Dự án cá nhân</span>
-                                ・
-                                <span>21/11/2024</span>
-                            </p>
-                            <p class="section__card--text">Một trang web giới thiệu bản thân, các kỹ năng và dự án
-                                đã thực hiện, được thiết kế chuyên nghiệp và tối ưu trải nghiệm người dùng.
-                            </p>
-                        </div>
+                    <div class="section__more">
+                        <a class="btn btn-primary" href="{{ route('socials') }}">Xem thêm</a>
                     </div>
-                </div>
-                <div class="section__more">
-                    <a class="btn btn-primary" href="#">Xem thêm</a>
-                </div>
-            </section>
+                </section>
+            @endif
 
             @if (!empty($user->iframe_google_map) && !empty($user->country))
                 <section class="map">
