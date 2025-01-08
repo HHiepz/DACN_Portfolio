@@ -20,8 +20,8 @@ class HomeController extends Controller
         $user = User::first();
         $languages = Language::orderByDesc('priority')->get();
         $skillCategories = SkillCategory::orderByDesc('priority')->get();
-        $products = Product::orderByDesc('priority')->limit(3)->get();
-        $socials = Social::orderByDesc('priority')->limit(3)->get();
+        $products = Product::where('status', 'published')->orderByDesc('priority')->limit(3)->get();
+        $socials = Social::where('status', 'published')->orderByDesc('priority')->limit(3)->get();
         return view('home', compact('user', 'languages', 'skillCategories', 'products', 'socials'));
     }
 

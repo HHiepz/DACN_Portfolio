@@ -13,7 +13,7 @@ class SocialController extends Controller
      */
     public function index()
     {
-        $socials = Social::orderByDesc('priority')->paginate(10);
+        $socials = Social::where('status','published')->orderByDesc('priority')->paginate(10);
         return view('client.social.index', compact('socials'));
     }
 

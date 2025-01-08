@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::orderByDesc('priority')->paginate(12);
+        $products = Product::where('status','published')->orderByDesc('priority')->paginate(12);
         $technologies = Technology::all();
         return view('client.product.index', compact('products', 'technologies'));
     }
@@ -41,7 +41,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $technology = Technology::find($id);
-        $products = $technology->products()->paginate(12);
+        $products = $technology->products()->where('status','published')->paginate(12);
         $technologies = Technology::all();
         return view('client.product.search', compact('products', 'technologies'));
     }

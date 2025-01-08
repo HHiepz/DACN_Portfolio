@@ -13,7 +13,7 @@ class SocialDetailController extends Controller
      */
     public function index($id)
     {
-        $social = Social::find($id);
+        $social = Social::where('status','published')->find($id);
         if ($social) {
             return view('client.socialDetail.index', compact('social'));
         }

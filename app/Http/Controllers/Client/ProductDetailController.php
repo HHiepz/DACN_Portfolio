@@ -13,7 +13,7 @@ class ProductDetailController extends Controller
      */
     public function index($id)
     {
-        $product = Product::find($id);
+        $product = Product::where('status','published')->find($id);
         if ($product) {
             return view('client.productDetail.index', compact('product'));
         }
