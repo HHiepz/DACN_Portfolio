@@ -5,16 +5,16 @@
                 <p class="footer__content--owner">Mr HIEP</p>
                 <ul class="footer__nav">
                     <li class="footer__nav--item">
-                        <a href="#">Trang chủ</a>
+                        <a href="{{ route('home') }}">Trang chủ</a>
                     </li>
                     <li class="footer__nav--item">
-                        <a href="#">Sản phẩm</a>
+                        <a href="{{ route('products') }}">Sản phẩm</a>
                     </li>
                     <li class="footer__nav--item">
-                        <a href="#">Cuộc sống xã hội</a>
+                        <a href="{{ route('socials') }}">Cuộc sống xã hội</a>
                     </li>
                     <li class="footer__nav--item">
-                        <a href="#">Sinh sống và làm việc</a>
+                        <a href="{{ route('home') }}">Sinh sống và làm việc</a>
                     </li>
                 </ul>
             </div>

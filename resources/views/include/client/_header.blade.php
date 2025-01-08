@@ -3,7 +3,7 @@
         <div class="d-flex align-items-center">
             <!-- Logo -->
             <div class="header__logo">
-                <a href="{{ route('home') }}">Hữu Hiệp</a>
+                <a href="{{ route('home') }}">{{ env('APP_NAME') }}</a>
             </div>
             <!-- Menu -->
             <nav class="header__menu">
