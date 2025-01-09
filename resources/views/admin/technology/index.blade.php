@@ -101,6 +101,25 @@
                                                                 <button type="submit"
                                                                     class="btn btn-sm btn-outline-danger">Xóa</button>
                                                             </form>
+                                                            @if ($technology->is_public == true)
+                                                                <form
+                                                                    action="{{ route('admin.toggleTechnology.update', $technology->id) }}"
+                                                                    method="POST" class="d-inline-block">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <button type="submit"
+                                                                        class="btn btn-sm btn-info">Ẩn</button>
+                                                                </form>
+                                                            @else
+                                                                <form
+                                                                    action="{{ route('admin.toggleTechnology.update', $technology->id) }}"
+                                                                    method="POST" class="d-inline-block">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <button type="submit"
+                                                                        class="btn btn-sm btn-info">Hiện</button>
+                                                                </form>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach

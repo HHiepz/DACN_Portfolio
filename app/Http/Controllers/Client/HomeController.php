@@ -9,6 +9,7 @@ use App\Models\Language;
 use App\Models\SkillCategory;
 use App\Models\Product;
 use App\Models\Social;
+use App\Models\Technology;
 
 class HomeController extends Controller
 {
@@ -22,7 +23,8 @@ class HomeController extends Controller
         $skillCategories = SkillCategory::orderByDesc('priority')->get();
         $products = Product::where('status', 'published')->orderByDesc('priority')->limit(3)->get();
         $socials = Social::where('status', 'published')->orderByDesc('priority')->limit(3)->get();
-        return view('home', compact('user', 'languages', 'skillCategories', 'products', 'socials'));
+        $technologies = Technology::where('is_public', true)->get();
+        return view('home', compact('user', 'languages', 'skillCategories', 'products', 'socials', 'technologies'));
     }
 
     /**

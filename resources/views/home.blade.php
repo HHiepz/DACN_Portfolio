@@ -86,28 +86,17 @@
                 </section>
             @endif
 
-            <section class="skills">
-                <div class="skill__item">
-                    <img src="{{ asset('/images/icons/bootstrap.svg') }}" class="img-fluid rounded-top" alt="" />
-                    <span class="skill__item--text">Bootstrap</span>
-                </div>
-                <div class="skill__item">
-                    <img src="{{ asset('/images/icons/laravel.svg') }}" class="img-fluid rounded-top" alt="" />
-                    <span class="skill__item--text">Laravel</span>
-                </div>
-                <div class="skill__item">
-                    <img src="{{ asset('/images/icons/html.svg') }}" class="img-fluid rounded-top" alt="" />
-                    <span class="skill__item--text">HTML</span>
-                </div>
-                <div class="skill__item">
-                    <img src="{{ asset('/images/icons/css.svg') }}" class="img-fluid rounded-top" alt="" />
-                    <span class="skill__item--text">CSS</span>
-                </div>
-                <div class="skill__item">
-                    <img src="{{ asset('/images/icons/mysql.svg') }}" class="img-fluid rounded-top" alt="" />
-                    <span class="skill__item--text">MySQL</span>
-                </div>
-            </section>
+            @if ($technologies->count() > 0)
+                <section class="skills">
+                    @foreach ($technologies as $technology)
+                        <div class="skill__item">
+                            <img src="{{ asset('storage/' . $technology->image_url) }}" class="img-fluid rounded-top"
+                                alt="{{ $technology->name }}" />
+                            <span class="skill__item--text">{{ $technology->name }}</span>
+                        </div>
+                    @endforeach
+                </section>
+            @endif
 
             @if ($socials->count() > 0)
                 <section class="social">

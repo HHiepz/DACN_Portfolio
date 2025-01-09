@@ -155,4 +155,20 @@ class TechnologyController extends Controller
         }
         return redirect()->back()->with('success', 'Không tìm thấy công nghệ');
     }
+
+    public function toggleTechnologyVisibility($id)
+    {
+        $technology = Technology::find($id);
+        if ($technology) {
+            if ($technology->is_public == true) {
+                $technology->is_public = false;
+            } else {
+                $technology->is_public = true;
+            }
+            $technology->save();
+
+            return redirect()->back()->with('success', 'Cập nhật trạng thái công nghệ thành công');
+        }
+        return redirect()->back()->with('success', 'Không tìm thấy công nghệ');
+    }
 }

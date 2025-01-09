@@ -99,6 +99,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         Route::get('/technology/edit/{id}', 'edit')->name('admin.technology.edit');
         Route::put('/technology/update/{id}', 'update')->name('admin.technology.update');
         Route::delete('/technology/delete/{id}', 'destroy')->name('admin.technology.delete');
+        Route::put('/technology/toggle/{id}', 'toggleTechnologyVisibility')->name('admin.toggleTechnology.update');
     });
 
     Route::controller(ProductCategoryController::class)->group(function () {
