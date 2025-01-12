@@ -144,6 +144,11 @@ class TechnologyController extends Controller
         $technology = Technology::find($id);
 
         if ($technology) {
+            // Không cho xóa khi có tồn tại sản phẩm
+            if ($technology->products->count() > 0) {
+                return redirect()->back()->with('error', 'Không thể xóa vì tồn tại công nghệ trong dự án');
+            }
+
             // Xóa ảnh nếu tệp tin tồn tại
             if (Storage::exists('public/' . $technology->image_url)) {
                 Storage::delete('public/' . $technology->image_url);

@@ -80,6 +80,18 @@
                                                         <td>{{ $technology->id }}.</td>
                                                         <td>
                                                             <p class="mb-0">{{ $technology->name }}</p>
+                                                            @if ($technology->products->count() > 0)
+                                                                <p class="mb-0 text-muted">Số sản phẩm:
+                                                                    {{ $technology->products->count() }}
+                                                                </p>
+                                                                <p class="mb-0 text-muted">
+                                                                    @foreach ($technology->products as $product)
+                                                                        <span class="badge bg-primary">
+                                                                            {{ $product->name }}
+                                                                        </span>
+                                                                    @endforeach
+                                                                </p>
+                                                            @endif
                                                         </td>
                                                         <td>
                                                             @if (empty($technology->image_url))
