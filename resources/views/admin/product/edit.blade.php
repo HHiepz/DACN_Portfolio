@@ -139,7 +139,7 @@
                                                     <span class="input-group-text" id="basic-addon2">Ngày bắt đầu (có thể
                                                         bỏ trống)</span>
                                                     <input type="date" class="form-control" name="product_started_at"
-                                                        value="{{ $product->project_started_at }}" />
+                                                        value="{{ $product->project_started_at ? $product->project_started_at->format('Y-m-d') : '' }}" />
                                                 </div>
                                                 @error('product_started_at')
                                                     <div class="text-danger">{{ $message }}</div>
@@ -152,7 +152,7 @@
                                                     <span class="input-group-text" id="basic-addon2">Ngày kết thúc (có thể
                                                         bỏ trống)</span>
                                                     <input type="date" class="form-control" name="product_ended_at"
-                                                        value="{{ $product->project_ended_at }}" />
+                                                        value="{{ $product->project_ended_at ? $product->project_ended_at->format('Y-m-d') : '' }}" />
                                                 </div>
                                                 @error('product_ended_at')
                                                     <div class="text-danger">{{ $message }}</div>

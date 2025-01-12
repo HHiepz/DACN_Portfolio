@@ -81,13 +81,13 @@
                                                                 <p class="mb-0">
                                                                     <i class="bi bi-calendar"></i>
                                                                     @if ($social->social_started_at && $social->social_ended_at)
-                                                                        {{ $social->social_started_at }}
+                                                                        {{ $social->social_started_at->format('Y/m/d') }}
                                                                         -
-                                                                        {{ $social->social_ended_at }}
+                                                                        {{ $social->social_ended_at->format('Y/m/d') }}
                                                                     @elseif ($social->social_started_at)
-                                                                        {{ $social->social_started_at }}
+                                                                        {{ $social->social_started_at->format('Y/m/d') }}
                                                                     @elseif ($social->social_ended_at)
-                                                                        {{ $social->social_ended_at }}
+                                                                        {{ $social->social_ended_at->format('Y/m/d') }}
                                                                     @endif
                                                                 </p>
                                                             @endif

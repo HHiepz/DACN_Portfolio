@@ -65,8 +65,7 @@
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="basic-addon2">Loại</span>
                                                     <input type="text" class="form-control" name="social_type"
-                                                        placeholder="Dự án cá nhân, nhóm,..."
-                                                        value="{{ $social->type }}" />
+                                                        placeholder="Dự án cá nhân, nhóm,..." value="{{ $social->type }}" />
                                                 </div>
                                                 @error('social_type')
                                                     <div class="text-danger">{{ $message }}</div>
@@ -122,7 +121,7 @@
                                                     <span class="input-group-text" id="basic-addon2">Ngày bắt đầu (có thể
                                                         bỏ trống)</span>
                                                     <input type="date" class="form-control" name="social_started_at"
-                                                        value="{{ $social->social_started_at }}" />
+                                                        value="{{ $social->social_started_at ? $social->social_started_at->format('Y-m-d') : '' }}" />
                                                 </div>
                                                 @error('social_started_at')
                                                     <div class="text-danger">{{ $message }}</div>
@@ -135,7 +134,7 @@
                                                     <span class="input-group-text" id="basic-addon2">Ngày kết thúc (có thể
                                                         bỏ trống)</span>
                                                     <input type="date" class="form-control" name="social_ended_at"
-                                                        value="{{ $social->social_ended_at }}" />
+                                                        value="{{ $social->social_ended_at ? $social->social_ended_at->format('Y-m-d') : '' }}" />
                                                 </div>
                                                 @error('social_ended_at')
                                                     <div class="text-danger">{{ $message }}</div>
