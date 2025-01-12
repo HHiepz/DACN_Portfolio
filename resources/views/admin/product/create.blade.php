@@ -110,6 +110,28 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="product_github_link" class="form-label">Link Github</label>
+                                                <input type="text" class="form-control" name="product_github_link"
+                                                    id="product_github_link" placeholder="Link Github"
+                                                    value="{{ old('product_github_link') }}" />
+                                                @error('product_github_link')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="product_preview_link" class="form-label">Link Preview</label>
+                                                <input type="text" class="form-control" name="product_preview_link"
+                                                    id="product_preview_link" placeholder="Link Preview"
+                                                    value="{{ old('product_preview_link') }}" />
+                                                @error('product_preview_link')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Mô tả ngắn (tối đa 255 ký

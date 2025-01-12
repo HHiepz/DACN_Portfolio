@@ -47,6 +47,8 @@ class ProductController extends Controller
                 'product_description' => 'required',
                 'product_started_at' => 'date|nullable',
                 'product_ended_at' => 'date|nullable',
+                'product_github_link' => 'nullable|url|max:255',
+                'product_preview_link' => 'nullable|url|max:255'
             ],
             [
                 'required' => ':attribute không được để trống',
@@ -55,6 +57,7 @@ class ProductController extends Controller
                 'image' => ':attribute phải là hình ảnh',
                 'mimes' => ':attribute phải có định dạng jpeg, png, jpg, gif, svg',
                 'date' => ':attribute phải là ngày tháng',
+                'url' => ':attribute phải là một liên kết hợp lệ.'
             ],
             [
                 'product_name' => 'Tên sản phẩm',
@@ -66,6 +69,8 @@ class ProductController extends Controller
                 'product_description' => 'Mô tả',
                 'product_started_at' => 'Ngày bắt đầu',
                 'product_ended_at' => 'Ngày kết thúc',
+                'product_github_link' => 'Liên kết Github',
+                'product_preview_link' => 'Liên kết Preview'
             ]
         );
 
@@ -79,6 +84,8 @@ class ProductController extends Controller
         $product->project_ended_at = $formField['product_ended_at'];
         $product->product_category_id = $formField['product_category_id'];
         $product->status = 'draft';
+        $product->github_link = $formField['product_github_link'];
+        $product->preview_link = $formField['product_preview_link'];
 
         // Xử lý hình ảnh
         if ($request->hasFile('product_image')) {
@@ -140,6 +147,8 @@ class ProductController extends Controller
                 'product_started_at' => 'date|nullable',
                 'product_ended_at' => 'date|nullable',
                 'product_status' => 'required',
+                'product_github_link' => 'nullable|url|max:255',
+                'product_preview_link' => 'nullable|url|max:255'
             ],
             [
                 'required' => ':attribute không được để trống',
@@ -148,6 +157,7 @@ class ProductController extends Controller
                 'image' => ':attribute phải là hình ảnh',
                 'mimes' => ':attribute phải có định dạng jpeg, png, jpg, gif, svg',
                 'date' => ':attribute phải là ngày tháng',
+                'url' => ':attribute phải là một liên kết hợp lệ.',
             ],
             [
                 'product_name' => 'Tên sản phẩm',
@@ -160,6 +170,8 @@ class ProductController extends Controller
                 'product_started_at' => 'Ngày bắt đầu',
                 'product_ended_at' => 'Ngày kết thúc',
                 'product_status' => 'Trạng thái',
+                'product_github_link' => 'Liên kết Github',
+                'product_preview_link' => 'Liên kết Preview'
             ]
         );
 
@@ -175,6 +187,8 @@ class ProductController extends Controller
             $product->project_ended_at = $formField['product_ended_at'];
             $product->product_category_id = $formField['product_category_id'];
             $product->status = $formField['product_status'];
+            $product->github_link = $formField['product_github_link'];
+            $product->preview_link = $formField['product_preview_link'];
 
             // Xử lý hình ảnh
             if ($request->hasFile('product_image')) {
