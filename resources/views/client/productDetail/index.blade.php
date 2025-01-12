@@ -50,18 +50,20 @@
                     <h2 class="detail__title">{{ $product->name }}</h2>
                     <p class="detail__type">
                         <span>{{ $product->type }}</span>
-                        ・
-                        <span>
-                            @if ($product->project_started_at && $product->project_ended_at)
-                                {{ $product->project_started_at->format('d/m/Y') }}
-                                -
-                                {{ $product->project_ended_at->format('d/m/Y') }}
-                            @elseif ($product->project_started_at)
-                                {{ $product->project_started_at->format('d/m/Y') }}
-                            @elseif ($product->project_ended_at)
-                                {{ $product->project_ended_at->format('d/m/Y') }}
-                            @endif
-                        </span>
+                        @if (!empty($product->project_started_at) || !empty($product->project_ended_at))
+                            ・
+                            <span>
+                                @if ($product->project_started_at && $product->project_ended_at)
+                                    {{ $product->project_started_at->format('d/m/Y') }}
+                                    -
+                                    {{ $product->project_ended_at->format('d/m/Y') }}
+                                @elseif ($product->project_started_at)
+                                    {{ $product->project_started_at->format('d/m/Y') }}
+                                @elseif ($product->project_ended_at)
+                                    {{ $product->project_ended_at->format('d/m/Y') }}
+                                @endif
+                            </span>
+                        @endif
                     </p>
                     <p class="detail__description">
                         {{ $product->short_description }}

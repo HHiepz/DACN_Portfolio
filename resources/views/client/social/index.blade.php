@@ -32,18 +32,20 @@
                                     </a>
                                     <p class="section__card--type">
                                         <span>{{ $social->type }}</span>
-                                        ・
-                                        <span>
-                                            @if ($social->social_started_at && $social->social_ended_at)
-                                                {{ $social->social_started_at->format('d/m/Y') }}
-                                                -
-                                                {{ $social->social_ended_at->format('d/m/Y') }}
-                                            @elseif ($social->social_started_at)
-                                                {{ $social->social_started_at->format('d/m/Y') }}
-                                            @elseif ($social->social_ended_at)
-                                                {{ $social->social_ended_at->format('d/m/Y') }}
-                                            @endif
-                                        </span>
+                                        @if (!empty($social->social_started_at) || !empty($social->social_ended_at))
+                                            ・
+                                            <span>
+                                                @if ($social->social_started_at && $social->social_ended_at)
+                                                    {{ $social->social_started_at->format('d/m/Y') }}
+                                                    -
+                                                    {{ $social->social_ended_at->format('d/m/Y') }}
+                                                @elseif ($social->social_started_at)
+                                                    {{ $social->social_started_at->format('d/m/Y') }}
+                                                @elseif ($social->social_ended_at)
+                                                    {{ $social->social_ended_at->format('d/m/Y') }}
+                                                @endif
+                                            </span>
+                                        @endif
                                     </p>
                                     <h4 class="section__card--title">
                                         <a href="{{ route('social.detail', $social->id) }}">

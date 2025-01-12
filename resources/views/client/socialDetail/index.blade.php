@@ -50,18 +50,20 @@
                     <h2 class="detail__title">{{ $social->name }}</h2>
                     <p class="detail__type">
                         <span>{{ $social->type }}</span>
-                        ・
-                        <span>
-                            @if ($social->social_started_at && $social->social_ended_at)
-                                {{ $social->social_started_at->format('d/m/Y') }}
-                                -
-                                {{ $social->social_ended_at->format('d/m/Y') }}
-                            @elseif ($social->social_started_at)
-                                {{ $social->social_started_at->format('d/m/Y') }}
-                            @elseif ($social->social_ended_at)
-                                {{ $social->social_ended_at->format('d/m/Y') }}
-                            @endif
-                        </span>
+                        @if (!empty($social->social_started_at) || !empty($social->social_ended_at))
+                            ・
+                            <span>
+                                @if ($social->social_started_at && $social->social_ended_at)
+                                    {{ $social->social_started_at->format('d/m/Y') }}
+                                    -
+                                    {{ $social->social_ended_at->format('d/m/Y') }}
+                                @elseif ($social->social_started_at)
+                                    {{ $social->social_started_at->format('d/m/Y') }}
+                                @elseif ($social->social_ended_at)
+                                    {{ $social->social_ended_at->format('d/m/Y') }}
+                                @endif
+                            </span>
+                        @endif
                     </p>
                     <p class="detail__description">
                         {{ $social->short_description }}
