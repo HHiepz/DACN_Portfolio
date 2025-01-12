@@ -77,14 +77,14 @@
                         </div>
                     @endif
                     <div class="detail__buttons">
-                        @if (!empty($product->github))
-                            <a href="{{ $product->github }}" class="btn btn-tertiary">
+                        @if (!empty($product->github_link))
+                            <a href="{{ $product->github_link }}" target="_blank" class="btn btn-tertiary">
                                 Github
                                 <i class="bi bi-github"></i>
                             </a>
                         @endif
-                        @if (!empty($product->preview))
-                            <a href="{{ $product->preview }}" class="btn btn-outline-tertiary">
+                        @if (!empty($product->preview_link))
+                            <a href="{{ $product->preview_link }}" target="_blank" class="btn btn-outline-tertiary">
                                 Xem trực tiếp
                                 <i class="bi bi-eye"></i>
                             </a>
