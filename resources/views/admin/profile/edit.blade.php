@@ -76,7 +76,7 @@
                                     <div class="mb-3">
                                         <label for="" class="form-label fw-bold">Năm sinh:</label>
                                         <input type="date" name="birthday"class="form-control" placeholder="Địa chỉ"
-                                            value="{{ $user->birthday }}" />
+                                            value="{{ $user->birthday ? $user->birthday->format('Y-m-d') : '' }}" />
                                         @error('birthday')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror

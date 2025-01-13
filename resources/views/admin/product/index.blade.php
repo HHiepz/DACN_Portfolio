@@ -95,13 +95,13 @@
                                                                 <p class="mb-0">
                                                                     <i class="bi bi-calendar"></i>
                                                                     @if ($product->project_started_at && $product->project_ended_at)
-                                                                        {{ $product->project_started_at }}
+                                                                        {{ $product->project_started_at->format('Y/m/d') }}
                                                                         -
-                                                                        {{ $product->project_ended_at }}
+                                                                        {{ $product->project_ended_at->format('Y/m/d') }}
                                                                     @elseif ($product->project_started_at)
-                                                                        {{ $product->project_started_at }}
+                                                                        {{ $product->project_started_at->format('Y/m/d') }}
                                                                     @elseif ($product->project_ended_at)
-                                                                        {{ $product->project_ended_at }}
+                                                                        {{ $product->project_ended_at->format('Y/m/d') }}
                                                                     @endif
                                                                 </p>
                                                             @endif
