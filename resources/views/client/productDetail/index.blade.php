@@ -19,6 +19,13 @@
                         <div class="carousel-indicators">
                             <button type="button" data-bs-target="#detail__images" data-bs-slide-to="0"
                                 class="active"></button>
+
+                            @if ($product->images->count() > 0)
+                                @for ($i = 0; $i < $product->images->count(); $i++)
+                                    <button type="button" data-bs-target="#detail__images"
+                                        data-bs-slide-to="{{ $i + 1 }}" class="active"></button>
+                                @endfor
+                            @endif
                         </div>
 
                         <!-- The slideshow/carousel -->
@@ -28,6 +35,18 @@
                                     <img src="{{ asset('storage/' . $product->image_url) }}" alt="{{ $product->name }}"
                                         class="d-block w-100">
                                 </div>
+
+                                @if ($product->images->count() > 0)
+                                    @foreach ($product->images as $image)
+                                        <div class="carousel-item">
+                                            <img src="https://placehold.co/4000x2000" alt="Los Angeles"
+                                                class="d-block w-100">
+
+                                            {{-- <img src="{{ asset('storage/' . $image->image_url) }}" alt="{{ $image->name }}"
+                                                class="d-block w-100"> --}}
+                                        </div>
+                                    @endforeach
+                                @endif
                             @else
                                 <div class="carousel-item active">
                                     <img src="https://placehold.co/4000x2000" alt="Los Angeles" class="d-block w-100">

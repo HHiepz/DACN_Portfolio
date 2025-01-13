@@ -23,4 +23,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Technology::class, 'product_technology', 'product_id', 'technology_id');
     }
+
+    public function images()
+    {
+        return $this->beLongsToMany(Image::class, 'product_image', 'product_id', 'image_id');
+    }
 }
