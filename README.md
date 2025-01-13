@@ -18,3 +18,44 @@ Xin chào! Tôi là Trần Hữu Hiệp, một Backend Developer với 1 năm ki
 
 - [Github (HHiepz)](https://www.github.com/hhiepz)
 - [LinkedIn (Trần Hữu Hiệp)](https://www.linkedin.com/in/hhiepz/)
+
+
+## Khởi chạy dự án
+
+Hướng dẫn dưới đây sẽ giúp bạn cài đặt và khởi chạy dự án này trên máy tính của mình.
+
+### Yêu cầu
+
+- PHP tối thiểu phiên bản 8.2
+- Database (Khuyến nghị: [MySQL](https://www.mysql.com/))
+- [Composer](https://getcomposer.org/download/) phiên bản 2 trở lên
+
+### Cài đặt
+
+Sao chép dự án từ GitHub:
+```bash
+git clone https://github.com/HHiepz/DACN_Portfolio.git
+```
+
+Cài đặt các gói phụ thuộc qua Composer:
+```bash
+composer install
+```
+
+Thiết lập cấu hình môi trường:
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+Tạo database và chạy migration:
+```bash
+php artisan migrate
+```
+
+Khởi chạy dự án:
+```bash
+php artisan serve
+```
+
+Bây giờ bạn có thể truy cập dự án tại `http://localhost:8000`.
