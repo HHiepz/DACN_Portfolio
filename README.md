@@ -46,6 +46,7 @@ Thiết lập cấu hình môi trường:
 ```bash
 cp .env.example .env
 php artisan key:generate
+php artisan storage:link
 ```
 
 Tạo database và chạy migration:
