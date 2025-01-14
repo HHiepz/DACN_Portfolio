@@ -50,7 +50,7 @@ php artisan key:generate
 
 Tạo database và chạy migration:
 ```bash
-php artisan migrate
+php artisan migrate --seed
 ```
 
 Khởi chạy dự án:
@@ -59,3 +59,15 @@ php artisan serve
 ```
 
 Bây giờ bạn có thể truy cập dự án tại `http://localhost:8000`.
+
+### Truy cập quản trị viên
+
+- URL: `http://localhost:8000/auth/login`
+- Tài khoản `admin@gmail.com`
+- Mật khẩu `admin`
+
+⚠️ **Khuyến nghị**: Thay đổi mật khẩu sau khi đăng nhập để đảm bảo bảo mật.
+
+## 🤝 Đóng góp
+Nếu bạn muốn đóng góp, vui lòng fork dự án, tạo branch mới và gửi pull request. Chúng tôi rất hoan nghênh ý kiến của bạn!
+
