@@ -184,6 +184,12 @@ class ProfileController extends Controller
                 Storage::delete('public/' . $file->file_url);
             }
 
+            $user = Auth::user();
+            if ($user->file_id == $id) {
+                $user->file_id = NULL;
+                $user->save();
+            }
+
             $file->delete();
             return redirect()->back()->with('success', 'Xóa thành công 1 file chi tiết');
         }
