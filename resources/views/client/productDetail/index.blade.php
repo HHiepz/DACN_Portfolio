@@ -39,11 +39,8 @@
                                 @if ($product->images->count() > 0)
                                     @foreach ($product->images as $image)
                                         <div class="carousel-item">
-                                            <img src="https://placehold.co/4000x2000" alt="Los Angeles"
+                                            <img src="{{ asset('storage/' . $image->image_url) }}" alt="{{ $image->name }}"
                                                 class="d-block w-100">
-
-                                            {{-- <img src="{{ asset('storage/' . $image->image_url) }}" alt="{{ $image->name }}"
-                                                class="d-block w-100"> --}}
                                         </div>
                                     @endforeach
                                 @endif

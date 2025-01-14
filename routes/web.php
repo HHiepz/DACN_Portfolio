@@ -90,6 +90,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         Route::put('/product/priority/up/{id}', 'upPriority')->name('admin.product.priority.up');
         Route::put('/product/priority/down/{id}', 'downPriority')->name('admin.product.priority.down');
         Route::put('/product/priority/reset/{id}', 'resetPriority')->name('admin.product.priority.reset');
+        Route::post('/product/{id}/image/store', 'storeImage')->name('admin.product.image.store');
+        Route::delete('/product/image/delete/{id}', 'destroyImage')->name('admin.product.image.delete');
     });
 
     Route::controller(TechnologyController::class)->group(function () {

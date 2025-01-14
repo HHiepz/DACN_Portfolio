@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Technology;
+use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -221,9 +222,18 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         if ($product) {
-            // Xóa hình ảnh
-            if (!empty($product->image_url) && Storage::exists('public/', $product->image_url)) {
-                Storage::delete('public/', $product->image_url);
+            // Xóa hình ảnh gốc
+            if (!empty($product->image_url) && Storage::exists('public/' . $product->image_url)) {
+                Storage::delete('public/' . $product->image_url);
+            }
+
+            // Xóa hình ảnh chi tiết
+            if ($product->images->count() > 0) {
+                foreach ($product->images as $image) {
+                    if (!empty($image->image_url) && Storage::exists('public/' . $image->image_url)) {
+                        Storage::delete('public/' . $image->image_url);
+                    }
+                }
             }
 
             // Xóa dữ liệu
@@ -265,5 +275,63 @@ class ProductController extends Controller
             return redirect()->back()->with('success', 'Đặt lại ưu tiên thành công');
         }
         return redirect()->back()->with('error', 'Sản phẩm không tồn tại');
+    }
+
+    public function storeImage(Request $request, $id)
+    {
+        $product = Product::find($id);
+
+        if ($product) {
+            if ($request->hasFile('images')) {
+                $request->validate(
+                    [
+                        'images' => 'required',
+                        'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    ],
+                    [
+                        'images.required' => 'Hình ảnh không được để trống',
+                        'images.*.image' => 'Ảnh thứ :index phải là hình ảnh',
+                        'images.*.mimes' => 'Ảnh thứ :index phải có định dạng jpeg, png, jpg, gif, svg',
+                        'images.*.max' => 'Ảnh thứ :index không được vượt quá 2MB',
+                    ],
+                    [
+                        'images' => 'Hình ảnh',
+                    ]
+                );
+
+                // Lập qua danh sách ảnh
+                foreach ($request->file('images') as $file) {
+                    // Lưu hình ảnh vào thư mục storage/app/public/products
+                    $imagePath = $file->store('products', 'public');
+
+                    // Lưu vào database
+                    $image = new Image();
+                    $image->name = $file->getClientOriginalName();
+                    $image->image_url = $imagePath;
+                    $image->save();
+
+                    // Tạo liên kết giữa sản phẩm và ảnh bằng bảng trung gian `product_image`
+                    $product->images()->attach($image->id);
+                }
+                return redirect()->back()->with('success', 'Tải hình ảnh thành công');
+            }
+            return redirect()->back()->with('error', 'Vui lòng chọn ảnh');
+        }
+        return redirect()->back()->with('error', 'Sản phẩm không tồn tại');
+    }
+
+    public function destroyImage($id)
+    {
+        $productImage = Image::find($id);
+        if ($productImage) {
+            // Xóa hình ảnh
+            if (!empty($productImage->image_url) && Storage::exists('public/' . $productImage->image_url)) {
+                Storage::delete('public/' . $productImage->image_url);
+            }
+
+            $productImage->delete();
+            return redirect()->back()->with('success', 'Xóa thành công 1 hình ảnh chi tiết');
+        }
+        return redirect()->back()->with('error', 'Hình ảnh chi tiết bạn vừa chọn không tồn tại');
     }
 }

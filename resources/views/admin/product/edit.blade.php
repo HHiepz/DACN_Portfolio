@@ -237,6 +237,71 @@
                             </div>
                             <!--end::Body-->
                         </div>
+
+                        <div class="card card-dark card-outline mb-4">
+                            <!--begin::Header-->
+                            <div class="card-header">
+                                <div class="card-title">Ảnh chi tiết</div>
+                            </div>
+                            <!--end::Header-->
+                            <!--begin::Body-->
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <form action="{{ route('admin.product.image.store', $product->id) }}"
+                                            method="post" enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="mb-3">
+                                                <input type="file" class="form-control" name="images[]" multiple
+                                                    placeholder="" aria-describedby="fileHelpId" />
+                                            </div>
+                                            @if ($errors->has('images.*'))
+                                                <div class="text-danger">
+                                                    @foreach ($errors->get('images.*') as $message)
+                                                        <p class="mb-0">{{ $message[0] }}</p>
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                            <div class="text-end">
+                                                <button type="submit" class="btn btn-outline-success w-100">Tải
+                                                    lên</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    @if ($product->images->count() > 0)
+                                        <div class="col-12">
+                                            <div class="row g-2">
+                                                @foreach ($product->images as $image)
+                                                    <div class="col-6">
+                                                        <p class="mb-0">
+                                                            {{ $image->name }}
+                                                        </p>
+                                                        <div>
+                                                            <form
+                                                                action="{{ route('admin.product.image.delete', $image->id) }}"
+                                                                method="post">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit"
+                                                                    class="btn btn-link text-danger p-0"
+                                                                    style="font-size: 0.875rem;">
+                                                                    Xóa
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <img src="{{ asset('storage/' . $image->image_url) }}"
+                                                            class="img-fluid rounded-top" alt="{{ $image->name }}" />
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                            <!--end::Body-->
+                        </div>
                     </div>
                 </div>
                 <!--end::Row-->
