@@ -8,7 +8,8 @@
                     <i class="bi bi-list"></i>
                 </a>
             </li>
-            <li class="nav-item d-none d-md-block"><a href="{{ route('admin.dashboard') }}" class="nav-link">Home</a>
+            <li class="nav-item d-none d-md-block"><a href="{{ route('home') }}" target="_blank" class="nav-link">Xem trang
+                    người dùng</a>
             </li>
         </ul>
         <!--end::Start Navbar Links-->
@@ -25,34 +26,35 @@
             <!--begin::User Menu Dropdown-->
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                    <img src="https://placehold.co/160x160" class="user-image rounded-circle shadow" alt="User" />
-                    <span class="d-none d-md-inline">Alexander Pierce</span>
+                    @if ($user->image_url == null)
+                        <img src="https://placehold.co/160x160" class="user-image rounded-circle shadow"
+                            alt="User" />
+                    @else
+                        <img src="{{ asset('storage/' . $user->image_url) }}" class="user-image rounded-circle shadow"
+                            alt="User" />
+                    @endif
+                    <span class="d-none d-md-inline">{{ $user->fullname }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                     <!--begin::User Image-->
                     <li class="user-header text-bg-primary">
-                        <img src="https://placehold.co/160x160" class="rounded-circle shadow" alt="User" />
+                        @if ($user->image_url == null)
+                            <img src="https://placehold.co/160x160" class="rounded-circle shadow" alt="User" />
+                        @else
+                            <img src="{{ asset('storage/' . $user->image_url) }}" class="rounded-circle shadow"
+                                alt="User" />
+                        @endif
                         <p>
-                            Alexander Pierce - Web Developer
+                            {{ $user->fullname }}
                             <small>Member since Nov. 2023</small>
                         </p>
                     </li>
                     <!--end::User Image-->
-                    <!--begin::Menu Body-->
-                    <li class="user-body">
-                        <!--begin::Row-->
-                        <div class="row">
-                            <div class="col-4 text-center"><a href="#">Followers</a></div>
-                            <div class="col-4 text-center"><a href="#">Sales</a></div>
-                            <div class="col-4 text-center"><a href="#">Friends</a></div>
-                        </div>
-                        <!--end::Row-->
-                    </li>
-                    <!--end::Menu Body-->
                     <!--begin::Menu Footer-->
                     <li class="user-footer">
-                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                        <a href="{{ route('logout') }}" class="btn btn-default btn-flat float-end">Sign out</a>
+                        <a href="{{ route('admin.profile.edit') }}" class="btn btn-default btn-flat">Cài đặt tài
+                            khoản</a>
+                        <a href="{{ route('logout') }}" class="btn btn-default btn-flat float-end">Đăng xuất</a>
                     </li>
                     <!--end::Menu Footer-->
                 </ul>
