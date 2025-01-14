@@ -8,7 +8,8 @@
                     <i class="bi bi-list"></i>
                 </a>
             </li>
-            <li class="nav-item d-none d-md-block"><a href="{{ route('home') }}" target="_blank" class="nav-link">Xem trang
+            <li class="nav-item d-none d-md-block"><a href="{{ route('home') }}" target="_blank" class="nav-link">Xem
+                    trang
                     người dùng</a>
             </li>
         </ul>
@@ -51,9 +52,17 @@
                     </li>
                     <!--end::User Image-->
                     <!--begin::Menu Footer-->
+                    <li class="user-body">
+                        <!--begin::Row-->
+                        <div class="row">
+                            <div class="col-12 text-center"><a href="{{ route('admin.profile.passowrd.edit') }}">Đổi mật khẩu</a></div>
+                        </div>
+                        <!--end::Row-->
+                    </li>
                     <li class="user-footer">
-                        <a href="{{ route('admin.profile.edit') }}" class="btn btn-default btn-flat">Cài đặt tài
-                            khoản</a>
+                        <a href="{{ route('admin.profile.edit') }}" class="btn btn-default btn-flat">
+                            Cài đặt tài khoản
+                        </a>
                         <a href="{{ route('logout') }}" class="btn btn-default btn-flat float-end">Đăng xuất</a>
                     </li>
                     <!--end::Menu Footer-->

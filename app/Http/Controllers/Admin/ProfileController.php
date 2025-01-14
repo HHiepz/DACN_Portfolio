@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\File;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -220,5 +221,42 @@ class ProfileController extends Controller
             return redirect()->back()->with('error', 'File không tồn tại');
         }
         return redirect()->back()->with('error', 'Người dùng không tồn tại');
+    }
+
+    public function editPassword()
+    {
+        return view('admin.forgotPassword.change');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $formFiled = $request->validate(
+            [
+                'passworld_old' => 'required',
+                'passworld' => 'required',
+                'passworld_again' => 'required'
+            ],
+            [
+                'required' => ':attribute không được để trống',
+            ],
+            [
+                'passworld_old' => 'Mật khẩu cũ',
+                'passworld' => 'Mật khẩu mới',
+                'passworld_again' => 'Mật khẩu lập lại'
+            ]
+        );
+
+        if ($formFiled['passworld'] !== $formFiled['passworld_again']) {
+            return redirect()->back()->with('error', 'Mật khẩu mới và mật khẩu lập lại không khớp');
+        }
+
+        $user = Auth::user();
+        if ($user && Hash::check($formFiled['passworld_old'], $user->password)) {
+            $user->password = Hash::make($formFiled['passworld']);
+            $user->save();
+            return redirect()->back()->with('success', 'Cập nhật mật khẩu thành công');
+        }
+
+        return redirect()->back()->with('error', 'Mật khẩu cũ không đúng');
     }
 }
