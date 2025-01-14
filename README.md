@@ -14,7 +14,7 @@
 
 ## Tác giả
 
-Xin chào! Tôi là Trần Hữu Hiệp, một Backend Developer với 1 năm kinh nghiệm. Website này là nơi tôi giới thiệu về bản thân, các dự án cá nhân và những kiến thức tôi đã học hỏi. Nếu bạn thấy những gì tôi chia sẻ hữu ích, hãy kết nối với tôi qua:
+Xin chào! Tôi là Trần Hữu Hiệp. Website này là nơi tôi giới thiệu về bản thân, các dự án cá nhân và những kiến thức tôi đã học hỏi. Nếu bạn thấy những gì tôi chia sẻ hữu ích, hãy kết nối với tôi qua:
 
 - [Github (HHiepz)](https://www.github.com/hhiepz)
 - [LinkedIn (Trần Hữu Hiệp)](https://www.linkedin.com/in/hhiepz/)
