@@ -108,6 +108,30 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3">
+                                        <label for="" class="form-label fw-bold">Link Github:</label>
+                                        <input type="text" name="github_link"class="form-control"
+                                            placeholder="Link Github" value="{{ $user->github_link }}" />
+                                        @error('github_link')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label fw-bold">Link Facebook:</label>
+                                        <input type="text" name="facebook_link"class="form-control"
+                                            placeholder="Link Facebook" value="{{ $user->facebook_link }}" />
+                                        @error('facebook_link')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label fw-bold">Link Linkedin:</label>
+                                        <input type="text" name="linkedin_link"class="form-control"
+                                            placeholder="Link Linkedin" value="{{ $user->linkedin_link }}" />
+                                        @error('linkedin_link')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
                                         <label for="" class="form-label fw-bold">Địa chỉ:</label>
                                         <input type="text" name="address"class="form-control" placeholder="Địa chỉ"
                                             value="{{ $user->address }}" />

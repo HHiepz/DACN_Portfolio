@@ -21,12 +21,21 @@
                 </div>
             @endif
             <div class="sidebar__contact">
-                <a href="#" class="sidebar__link">
-                    <i class="sidebar__icon bi bi-facebook"></i>
-                </a>
-                <a href="#" class="sidebar__link">
-                    <i class="sidebar__icon bi bi-github"></i>
-                </a>
+                @if (!empty($user->facebook_link))
+                    <a href="{{ $user->facebook_link }}" class="sidebar__link" target="_blank">
+                        <i class="sidebar__icon bi bi-facebook"></i>
+                    </a>
+                @endif
+                @if (!empty($user->github_link))
+                    <a href="{{ $user->github_link }}" class="sidebar__link" target="_blank">
+                        <i class="sidebar__icon bi bi-github"></i>
+                    </a>
+                @endif
+                @if (!empty($user->linkedin_link))
+                    <a href="{{ $user->linkedin_link }}" class="sidebar__link" target="_blank">
+                        <i class="sidebar__icon bi bi-linkedin"></i>
+                    </a>
+                @endif
             </div>
         </section>
 

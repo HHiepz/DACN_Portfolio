@@ -69,7 +69,10 @@ class ProfileController extends Controller
                 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'address' => 'required|string|max:255',
                 'description' => 'required|string',
-                'birthday' => 'date|nullable'
+                'birthday' => 'date|nullable',
+                'github_link' => 'string|nullable',
+                'facebook_link' => 'string|nullable',
+                'linkedin_link' => 'string|nullable',
             ],
             [
                 'required' => ':attribute không được để trống',
@@ -89,7 +92,10 @@ class ProfileController extends Controller
                 'image' => 'Ảnh đại diện',
                 'address' => 'Mô tả ngắn',
                 'description' => 'Mô tả chi tiết',
-                'birthday' => 'Ngày tháng năm sinh'
+                'birthday' => 'Ngày tháng năm sinh',
+                'github_link' => 'Link Github',
+                'facebook_link' => 'Link Facebook',
+                'linkedin_link' => 'Link Linkedin'
             ]
         );
 
@@ -105,6 +111,9 @@ class ProfileController extends Controller
             $user->address = $formFiled['address'];
             $user->description = $formFiled['description'];
             $user->birthday = $formFiled['birthday'];
+            $user->github_link = $formFiled['github_link'];
+            $user->facebook_link = $formFiled['facebook_link'];
+            $user->linkedin_link = $formFiled['linkedin_link'];
 
             // Xữ lý hình ảnh
             if ($request->hasFile('image')) {
