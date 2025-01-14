@@ -60,6 +60,15 @@ php artisan serve
 
 Bây giờ bạn có thể truy cập dự án tại `http://localhost:8000`.
 
+### Chạy dự án trên Hosting
+
+Để triển khai trên hosting, bạn cần thêm file `.htaccess` trong thư mục gốc của dự án:
+
+```bash
+RewriteEngine On
+RewriteRule ^(.*)$ public/$1 [L]
+```
+
 ### Truy cập quản trị viên
 
 - URL: `http://localhost:8000/auth/login`
