@@ -137,5 +137,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::controller(ProfileController::class)->group(function () {
         Route::get('/profile/edit', 'edit')->name('admin.profile.edit');
         Route::put('/profile/update', 'update')->name('admin.profile.update');
+        Route::post('/profile/file/store', 'storeFile')->name('admin.profile.file.store');
+        Route::delete('/profile/file/delete/{id}', 'destroyFile')->name('admin.profile.file.delete');
+        Route::put('/profile/file/display/remove', 'disableFileDisplay')->name('admin.profile.file.disable');
+        Route::put('/profile/file/display/active/{id}', 'enableFileDisplay')->name('admin.profile.file.active');
     });
 });

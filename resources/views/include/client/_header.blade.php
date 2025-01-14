@@ -22,7 +22,17 @@
         </div>
         <!-- Download CV -->
         <div class="header__download">
-            <a href="#" class="btn btn-primary">Tải CV của tôi <i class="bi bi-download"></i></a>
+            @if ($user->file_id == null)
+                <button class="btn btn-primary" disabled>
+                    Tải CV của tôi
+                    <i class="bi bi-download"></i>
+                </button>
+            @else
+                <a href="{{ asset('storage/' . $user->file->file_url) }}" class="btn btn-primary" download="">
+                    Tải CV của tôi
+                    <i class="bi bi-download"></i>
+                </a>
+            @endif
         </div>
     </div>
 </header>

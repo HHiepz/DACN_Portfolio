@@ -29,20 +29,13 @@
         <div class="app-content">
             <!--begin::Container-->
             <div class="container-fluid">
-                <form action="{{ route('admin.profile.update', $user->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <div class="row g-4">
-                        <!--begin::Col-->
-                        <div class="col-md-12">
-                            <div class="text-end">
-                                <button type="submit" name="update" class="btn btn-warning">
-                                    Lưu chỉnh sửa
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="col-md-8">
+                <div class="row g-4">
+                    <!--begin::Col-->
+                    <div class="col-md-8">
+                        <form action="{{ route('admin.profile.update', $user->id) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
                             <div class="card card-primary card-outline mb-4">
                                 <div class="card-header">
                                     <h3 class="card-title">Cài đặt thông tin - {{ $user->first_name }}</h3>
@@ -122,6 +115,13 @@
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label fw-bold">Ảnh đại diện:</label>
+                                        <input type="file" class="form-control" name="image" />
+                                        @error('image')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label for="" class="form-label">Mô tả chi tiết</label>
@@ -132,40 +132,138 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="card-footer">
+                                    <button type="submit" name="update" class="btn btn-warning">
+                                        Lưu chỉnh sửa
+                                    </button>
+                                </div>
                             </div>
+                        </form>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card card-primary card-outline mb-4">
+                            <!--begin::Header-->
+                            <div class="card-header">
+                                <div class="card-title">Ảnh đại diện</div>
+                            </div>
+                            <!--end::Header-->
+                            <!--begin::Body-->
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    @if (empty($user->image_url))
+                                        <span class="badge bg-danger">Chưa có hình ảnh</span>
+                                    @else
+                                        <img src="{{ asset('storage/' . $user->image_url) }}"
+                                            class="img-fluid rounded-circle" alt="{{ $user->name }}" />
+                                    @endif
+                                </div>
+                            </div>
+                            <!--end::Body-->
                         </div>
 
-                        <div class="col-md-4">
-                            <div class="card card-primary card-outline mb-4">
-                                <!--begin::Header-->
-                                <div class="card-header">
-                                    <div class="card-title">Ảnh đại diện</div>
-                                </div>
-                                <!--end::Header-->
-                                <!--begin::Body-->
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        @if (empty($user->image_url))
-                                            <span class="badge bg-danger">Chưa có hình ảnh</span>
-                                        @else
-                                            <img src="{{ asset('storage/' . $user->image_url) }}"
-                                                class="img-fluid rounded-circle" alt="{{ $user->name }}" />
-                                        @endif
-                                    </div>
 
-                                    <div class="mb-3">
-                                        <input type="file" class="form-control" name="image" />
-                                        @error('image')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                </div>
-                                <!--end::Body-->
+                        <div class="card card-dark card-outline mb-4">
+                            <!--begin::Header-->
+                            <div class="card-header">
+                                <div class="card-title">Danh sách CV</div>
                             </div>
+                            <!--end::Header-->
+                            <!--begin::Body-->
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <form action="{{ route('admin.profile.file.store') }}" method="post"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="mb-3">
+                                                <input type="file" class="form-control" name="files[]" multiple
+                                                    placeholder="" aria-describedby="fileHelpId" />
+                                            </div>
+                                            @if ($errors->has('files.*'))
+                                                <div class="text-danger">
+                                                    @foreach ($errors->get('files.*') as $message)
+                                                        <p class="mb-0">{{ $message[0] }}</p>
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                            <div class="text-end">
+                                                <button type="submit" class="btn btn-outline-success w-100">Tải
+                                                    lên</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    @if ($files->count() > 0)
+                                        <div class="col-12">
+                                            <div class="row g-2">
+                                                @foreach ($files as $file)
+                                                    <div class="col-12">
+                                                        <p class="mb-0">
+                                                            {{ $file->name }}
+                                                            @php
+                                                                $fileUrl = asset('storage/' . $file->file_url);
+                                                                $fileSize = filesize(
+                                                                    storage_path('app/public/' . $file->file_url),
+                                                                );
+                                                                $fileExtension = pathinfo(
+                                                                    $file->name,
+                                                                    PATHINFO_EXTENSION,
+                                                                );
+                                                            @endphp
+                                                            (<a href="{{ $fileUrl }}"
+                                                                target="_blank">{{ number_format($fileSize / 1048576, 2) }}
+                                                                MB</a> |
+                                                            {{ $fileExtension }})
+                                                        </p>
+                                                        <div class="d-flex align-items-center">
+                                                            @if ($user->file_id == $file->id)
+                                                                <form action="{{ route('admin.profile.file.disable') }}"
+                                                                    method="post">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <button type="submit"
+                                                                        class="btn btn-link text-secondary p-0 me-2">
+                                                                        Bỏ hiển thị
+                                                                    </button>
+                                                                </form>
+                                                            @else
+                                                                <form
+                                                                    action="{{ route('admin.profile.file.active', $file->id) }}"
+                                                                    method="post">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <button type="submit"
+                                                                        class="btn btn-link text-primary p-0 me-2">
+                                                                        Hiển thị chính
+                                                                    </button>
+                                                                </form>
+                                                            @endif
+                                                            <a href="{{ asset('storage/' . $file->file_url) }}"
+                                                                class="inline-block text-secondary me-2" download>
+                                                                Tải xuống
+                                                            </a>
+                                                            <form
+                                                                action="{{ route('admin.profile.file.delete', $file->id) }}"
+                                                                method="post">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit"
+                                                                    class="btn btn-link text-danger p-0 me-2">
+                                                                    Xóa
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                            <!--end::Body-->
                         </div>
                     </div>
-                </form>
+                </div>
                 <!--begin::Row-->
                 <!--end::Row-->
             </div>

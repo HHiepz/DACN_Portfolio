@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->last_name . ' ' . $this->first_name;
     }
+
+    public function file()
+    {
+        return $this->beLongsTo(File::class, 'file_id');
+    }
 }

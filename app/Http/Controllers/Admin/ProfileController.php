@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use Illuminate\Support\Facades\Storage;
+use App\Models\File;
 
 class ProfileController extends Controller
 {
@@ -48,7 +48,8 @@ class ProfileController extends Controller
     public function edit()
     {
         $user = Auth::user();
-        return view('admin.profile.edit', compact('user'));
+        $files = File::all();
+        return view('admin.profile.edit', compact('user', 'files'));
     }
 
     /**
@@ -131,5 +132,87 @@ class ProfileController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function storeFile(Request $request)
+    {
+        if ($request->hasFile('files')) {
+            $request->validate(
+                [
+                    'files' => 'required',
+                    'files.*' => 'mimes:pdf|max:2048',
+                ],
+                [
+                    'files.required' => 'File không được để trống',
+                    'files.*.mimes' => 'File thứ :index phải có định dạng pdf',
+                    'files.*.max' => 'File thứ :index không được vượt quá 2MB',
+                ],
+                [
+                    'files' => 'File',
+                ]
+            );
+            // Kiểm tra file trùng tên
+            foreach ($request->file('files') as $file) {
+                if (File::where('name', $file->getClientOriginalName())->exists()) {
+                    return redirect()->back()->with('error', 'File bạn tải lên đã có trong hệ thống');
+                }
+            }
+
+            // Lập qua danh sách file
+            foreach ($request->file('files') as $file) {
+                // Lưu file với tên gốc
+                $filePath = $file->storeAs('cv', $file->getClientOriginalName(), 'public');
+
+                // Lưu thông tin file vào database
+                $fileModel = new File();
+                $fileModel->name = $file->getClientOriginalName();
+                $fileModel->file_url = $filePath;
+                $fileModel->save();
+            }
+
+            return redirect()->back()->with('success', 'Tải file thành công');
+        }
+        return redirect()->back()->with('error', 'Vui lòng chọn file');
+    }
+
+    public function destroyFile($id)
+    {
+        $file = File::find($id);
+        if ($file) {
+            // Xóa file
+            if (!empty($file->file_url) && Storage::exists('public/' . $file->file_url)) {
+                Storage::delete('public/' . $file->file_url);
+            }
+
+            $file->delete();
+            return redirect()->back()->with('success', 'Xóa thành công 1 file chi tiết');
+        }
+        return redirect()->back()->with('error', 'File bạn vừa chọn không tồn tại');
+    }
+
+    public function disableFileDisplay()
+    {
+        $user = Auth::user();
+        if ($user) {
+            $user->file_id = NULL;
+            $user->save();
+            return redirect()->back()->with('success', 'Đã bỏ hiển thị file thành công');
+        }
+        return redirect()->back()->with('error', 'Người dùng không tồn tại');
+    }
+
+    public function enableFileDisplay($id)
+    {
+        $user = Auth::user();
+        if ($user) {
+            $file = File::find($id);
+            if ($file) {
+                $user->file_id = $id;
+                $user->save();
+                return redirect()->back()->with('success', 'Đặt file hiển thị thành công');
+            }
+            return redirect()->back()->with('error', 'File không tồn tại');
+        }
+        return redirect()->back()->with('error', 'Người dùng không tồn tại');
     }
 }
